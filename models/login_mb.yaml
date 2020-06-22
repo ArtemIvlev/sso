@@ -1,0 +1,10 @@
+title: login_mb
+description: Вход по логину или унк без пароля
+allOf:
+  - type: object
+    properties:
+      login:
+        type: string
+        description: УНК или Логин (Альяс) 
+  - $ref: ./grantDefault.yaml
+  - $ref: ./secondFactor.yaml

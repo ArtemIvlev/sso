@@ -1,0 +1,9 @@
+title: phone_number
+description: Вход по доверенному номеру телефона
+allOf:
+  - $ref: ./phone_number_mb.yaml
+  - type: object
+    properties:
+      password:
+        type: string
+        description: пароль 

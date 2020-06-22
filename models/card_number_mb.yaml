@@ -1,0 +1,10 @@
+title: card_number_mb
+description: Вход по номеру банковской карты без пароля
+allOf:
+  - type: object
+    properties:
+      cardNumber:
+        type: string
+        description: номер карты 
+  - $ref: ./grantDefault.yaml
+  - $ref: ./secondFactor.yaml
