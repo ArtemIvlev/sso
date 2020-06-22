@@ -5,6 +5,11 @@ allOf:
     properties:
       login:
         type: string
-        description: УНК или Логин (Альяс) 
+        description: УНК или Логин (Альяс)
+      password:
+        type: string
+        description: пароль
+    required:
+      - login
   - $ref: ./grantDefault.yaml
   - $ref: ./secondFactor.yaml

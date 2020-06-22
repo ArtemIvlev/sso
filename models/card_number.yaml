@@ -2,8 +2,5 @@ title: card_number
 description: Вход по номеру банковской карты
 allOf:
   - $ref: ./card_number_mb.yaml
-  - type: object
-    properties:
-      password:
-        type: string
-        description: пароль 
+required:
+  - password

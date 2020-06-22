@@ -2,8 +2,5 @@ title: login
 description: Вход по логину или унк
 allOf:
   - $ref: ./login_mb.yaml
-  - type: object
-    properties:
-      password:
-        type: string
-        description: пароль 
+required:
+  - password

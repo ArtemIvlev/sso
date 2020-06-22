@@ -6,5 +6,11 @@ allOf:
       cardNumber:
         type: string
         description: номер карты 
+      password:
+        type: string
+        description: пароль
+    required:
+      - cardNumber
+
   - $ref: ./grantDefault.yaml
   - $ref: ./secondFactor.yaml

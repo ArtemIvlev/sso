@@ -6,5 +6,11 @@ allOf:
       phoneNumber:
         type: string
         description: Доверенный номер телефона 
+      password:
+        type: string
+        description: пароль
+    required:
+      - phoneNumber
+
   - $ref: ./grantDefault.yaml
   - $ref: ./secondFactor.yaml
