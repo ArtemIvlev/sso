@@ -1,0 +1,41 @@
+title: grantDefault
+type: object
+properties:
+  sessionDataKey:
+    description: Идентификатор сессии входа
+    type: string
+    deprecated: true
+  scope:
+    default: openid
+    type: string
+    description: Набор данных которые мы хотим получить на основании данного ключа
+  grant_type:
+    type: string
+    description: |-
+      Тип входа:
+      `device_token` вход по пасскоду телефона
+      `refresh_token` обновление токена
+      `login` вход по логину (альясу) или унк + пароль
+      `phone_number` вход по доверенному номеру телефона + пароль
+      `card_number` вход по номеру карты + пароль
+      без пароля для мобильного телефона:
+      `login_mb` 
+      `phone_number_mb`
+      `card_number_mb`
+      `token_excange`
+      `token_excange_pwd`
+    enum:
+      - device_token
+      - refresh_token
+      - login
+      - phone_number
+      - card_number
+      - login_mb
+      - phone_number_mb
+      - card_number_mb
+      - token_excange
+      - token_excange_pwd
+required:
+  - scope
+  - grant_type
+description: ''

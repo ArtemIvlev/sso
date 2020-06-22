@@ -1,0 +1,25 @@
+title: passcode
+allOf:
+  - type: object
+    properties:
+      unk:
+        description: УНК
+        type: string
+        deprecated: true
+      ucn:
+        description: УНК
+        type: string
+      biometry:
+        type: boolean
+        description: Является ли вход по faceId или TouchId
+      secureCode:
+        description: используется для входа по пасскоду
+        type: string
+      challenge:
+        description: используется для входа по пасскоду
+        type: string
+      deviceTokenID:
+        description: используется для входа по пасскоду
+        type: string
+  - $ref: ./secondFactor.yaml
+  - $ref: ./grantDefault.yaml

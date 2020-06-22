@@ -1,0 +1,9 @@
+title: secondFactor
+type: object
+properties:
+  transactionId:
+    description: Идентификатор запроса второго фактора
+    type: string
+  otp:
+    description: То что пришло в СМС или пуше для второго фактора
+    type: string

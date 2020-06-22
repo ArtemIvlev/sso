@@ -1,7 +1,10 @@
 openapi: 3.0.1
 info:
-  title: OpenAPI definition
+  title: SSOAPI definition
   version: v0
+  contact:
+    name: Artem Ivlev
+  description: Апи входа
 servers:
   - url: 'http://localhost:8989'
     description: Generated server url
@@ -14,6 +17,7 @@ paths:
       operationId: token
       parameters:
         - name: Authorization
+          description: ключ basicAuth для канала (ServiceProvider)
           in: header
           required: true
           style: simple
@@ -21,6 +25,7 @@ paths:
           schema:
             type: string
         - name: X-Device-FingerPrint
+          description: base64 упакованный JSON объект описания устройства с которого пользователь входит. Данные получаются из библиотеки
           in: header
           required: false
           style: simple
@@ -38,22 +43,23 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/TokeRequestDto'
+              $ref: ../models/TokenRequestDto.yaml
+        description: ''
       responses:
         '200':
-          description: Returns the single DTO object for all grant types
+          description: Всё хорошо - получите объект с токенами
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TokenDto'
         '400':
-          description: 'Returns bad request for the following cases: invalid or expired refresh token (type: ''invalid_grant'')'
+          description: 'Ошибка токена, например, refresh токен уже протух'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
         '401':
-          description: 'Returns Unauthorized status if the second factor is required (type: ''second_factor_required'')'
+          description: 'Ошибка входа, например, нужен второй фактор'
           content:
             application/json:
               schema:
@@ -65,11 +71,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
         '500':
-          description: 'Unknow error (type: ''generic_error'')'
+          description: "Unknow error (type: 'generic_error')"
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
+      description: Получение токена
   /oidc/logout:
     get:
       tags:
@@ -110,6 +117,7 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ErrorDto'
+      description: Ручка выхода пользователя
 components:
   schemas:
     ErrorDto:
@@ -134,37 +142,5 @@ components:
           type: string
         id_token:
           type: string
-    TokeRequestDto:
-      required:
-        - grant_type
-      type: object
-      properties:
-        secureCode:
-          type: string
-        challenge:
-          type: string
-        deviceTokenID:
-          type: string
-        sessionDataKey:
-          type: string
-        scope:
-          type: string
-        transactionId:
-          type: string
-        unk:
-          type: string
-        eventBasedOTP:
-          type: string
-        otp:
-          type: string
-        biometry:
-          type: boolean
-        grant_type:
-          type: string
-          description: 'The field describe the behavior of action, The following values illustrate of available behaviors: device_token use for create token, refresh_token use for update token '
-          enum:
-            - device_token
-            - refresh_token
-        refresh_token:
-          type: string
-          description: The field is required if specified refresh_token grant type
+tags:
+  - name: token-controller
