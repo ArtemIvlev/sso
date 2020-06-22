@@ -13,7 +13,7 @@ properties:
     type: string
     description: |-
       Тип входа:
-      `device_token` вход по пасскоду телефона
+      `device_token` вход по пасскоду телефона 
       `refresh_token` обновление токена
       `login` вход по логину (альясу) или унк + пароль
       `phone_number` вход по доверенному номеру телефона + пароль

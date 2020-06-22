@@ -2,5 +2,6 @@ title: TokenRequestDto
 oneOf:
   - $ref: ./refresh_token.yaml
   - $ref: ./device_token.yaml
+  - $ref: ./login.yaml
 discriminator:
   propertyName: grant_type

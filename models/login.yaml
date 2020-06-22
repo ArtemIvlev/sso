@@ -1,0 +1,13 @@
+title: login
+description: Вход по логину или унк
+allOf:
+  - type: object
+    properties:
+      login:
+        type: string
+        description: УНК или Логин (Альяс) 
+      password:
+        type: string
+        description: пароль 
+  - $ref: ./grantDefault.yaml
+  - $ref: ./secondFactor.yaml
