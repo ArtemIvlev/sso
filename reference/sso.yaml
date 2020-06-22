@@ -13,8 +13,7 @@ paths:
     post:
       tags:
         - token-controller
-      summary: 'The API creates a token for a user and supports the following grant types: device_token and refresh_token.'
-      operationId: token
+      operationId: getToken
       parameters:
         - name: Authorization
           description: ключ basicAuth для канала (ServiceProvider)
