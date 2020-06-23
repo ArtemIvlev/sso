@@ -13,17 +13,17 @@ properties:
     type: string
     description: |-
       Тип входа:
-      `device_token` вход по пасскоду телефона 
-      `refresh_token` обновление токена
-      `login` вход по логину (альясу) или унк + пароль
-      `phone_number` вход по доверенному номеру телефона + пароль
-      `card_number` вход по номеру карты + пароль
+      * `device_token` вход по пасскоду телефона 
+      * `refresh_token` обновление токена
+      * `login` вход по логину (альясу) или унк + пароль
+      * `phone_number` вход по доверенному номеру телефона + пароль
+      * `card_number` вход по номеру карты + пароль
       без пароля для мобильного телефона:
-      `login_mb` 
-      `phone_number_mb`
-      `card_number_mb`
-      `token_excange`
-      `token_excange_pwd`
+      * `login_mb` 
+      * `phone_number_mb`
+      * `card_number_mb`
+      * `token_excange`
+      * `token_excange_pwd`
     enum:
       - device_token
       - refresh_token
