@@ -15,14 +15,6 @@ paths:
         - token-controller
       operationId: getToken
       parameters:
-        - name: Authorization
-          description: ключ basicAuth для канала (ServiceProvider)
-          in: header
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: string
         - name: X-Device-FingerPrint
           description: base64 упакованный JSON объект описания устройства с которого пользователь входит. Данные получаются из библиотеки
           in: header
@@ -76,6 +68,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
       description: Получение токена
+      security:
+        - service-provider: []
   /oidc/logout:
     get:
       tags:
@@ -141,5 +135,10 @@ components:
           type: string
         id_token:
           type: string
+  securitySchemes:
+    service-provider:
+      type: http
+      scheme: basic
+      description: Авторизация сервис провайдера
 tags:
   - name: token-controller

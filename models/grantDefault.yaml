@@ -1,5 +1,6 @@
 title: grantDefault
 type: object
+description: ''
 properties:
   sessionDataKey:
     description: Идентификатор сессии входа
@@ -11,19 +12,7 @@ properties:
     description: Набор данных которые мы хотим получить на основании данного ключа
   grant_type:
     type: string
-    description: |-
-      Тип входа:
-      * `device_token` вход по пасскоду телефона 
-      * `refresh_token` обновление токена
-      * `login` вход по логину (альясу) или унк + пароль
-      * `phone_number` вход по доверенному номеру телефона + пароль
-      * `card_number` вход по номеру карты + пароль
-      без пароля для мобильного телефона:
-      * `login_mb` 
-      * `phone_number_mb`
-      * `card_number_mb`
-      * `token_excange`
-      * `token_excange_pwd`
+    description: "Тип входа:\n* `device_token` вход по пасскоду телефона \n* `refresh_token` обновление токена\n* `login` вход по логину (альясу) или унк + пароль\n* `phone_number` вход по доверенному номеру телефона + пароль\n* `card_number` вход по номеру карты + пароль\nбез пароля для мобильного телефона:\n* `login_mb` \n* `phone_number_mb`\n* `card_number_mb`\n* `token_excange`\n* `token_excange_pwd`"
     enum:
       - device_token
       - refresh_token
@@ -36,6 +25,4 @@ properties:
       - token_excange
       - token_excange_pwd
 required:
-  - scope
   - grant_type
-description: ''
