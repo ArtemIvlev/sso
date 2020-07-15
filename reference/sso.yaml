@@ -30,12 +30,6 @@ paths:
           explode: true
           schema:
             type: string
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: ../models/TokenRequestDto.yaml
-        description: ''
       responses:
         '200':
           description: Всё хорошо - получите объект с токенами
@@ -70,6 +64,13 @@ paths:
       description: Получение токена
       security:
         - service-provider: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: ../models/TokenRequestDto.yaml
+        description: |
+          application/x-www-form-urlencoded:
   /oidc/logout:
     get:
       tags:
