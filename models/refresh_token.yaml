@@ -1,4 +1,5 @@
 title: refresh_token
+description: Обновление JWT-токена (при истечении срока действия)
 allOf:
   - type: object
     properties:
@@ -6,3 +7,5 @@ allOf:
           type: string
           description: 'Reftesh токен, в случае запроса с grant_type: refresh_token. Для обновления JWT'
   - $ref: ./grantDefault.yaml
+required:
+  - refresh_token

@@ -1,12 +1,13 @@
 title: TokenRequestDto
 oneOf:
-  - $ref: ./refresh_token.yaml
-  - $ref: ./device_token.yaml
   - $ref: ./login.yaml
   - $ref: ./card_number.yaml
-  - $ref: ./phone_number.yaml
+  - $ref: ./device_token.yaml
   - $ref: ./login_mb.yaml
   - $ref: ./card_number_mb.yaml
-  - $ref: ./phone_number_mb.yaml
+  - $ref: ./token_exchange.yaml
+  - $ref: ./refresh_token.yaml
+  - $ref: ./phone_number.yaml
+  - $ref: ./phone_number_mb.yaml  
 discriminator:
   propertyName: grant_type

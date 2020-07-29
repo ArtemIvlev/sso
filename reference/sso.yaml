@@ -15,6 +15,14 @@ paths:
         - token-controller
       operationId: getToken
       parameters:
+        - name: Authorization 
+          description: "Basic UsernamePassword. В качестве параметров Username Password для заголовка используются значения clientKey и clientSecret, которые указаны  в настроенном сервис провайдере в WSO2 IS"
+          in: header
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
         - name: X-Device-FingerPrint
           description: base64 упакованный JSON объект описания устройства с которого пользователь входит. Данные получаются из библиотеки
           in: header
@@ -23,13 +31,16 @@ paths:
           explode: false
           schema:
             type: string
-        - name: scope
-          in: query
-          required: true
-          style: form
-          explode: true
+        - name: Content-Type
+          description: тип контента запроса
+          in: header
+          required: false
+          style: simple
+          explode: false
           schema:
             type: string
+
+        
       responses:
         '200':
           description: Всё хорошо - получите объект с токенами
@@ -119,8 +130,13 @@ components:
       properties:
         type:
           type: string
+          description: Тип ошибки
         message:
+          type: string  
+          description: Текст ошибки   
+        message_title:
           type: string
+          description: Заголовок ошибки     
         additional_properties:
           type: object
           additionalProperties:
@@ -130,6 +146,7 @@ components:
       properties:
         scope:
           type: string
+          default: openid
         access_token:
           type: string
         refresh_token:

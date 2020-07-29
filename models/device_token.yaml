@@ -1,18 +1,8 @@
 title: passcode
-description: вход по пасскоду
+description: вход по пасскоду в МП
 allOf:
   - type: object
     properties:
-      unk:
-        description: УНК
-        type: string
-        deprecated: true
-      ucn:
-        description: УНК
-        type: string
-      biometry:
-        type: boolean
-        description: Является ли вход по faceId или TouchId
       secureCode:
         description: используется для входа по пасскоду
         type: string
@@ -24,3 +14,7 @@ allOf:
         type: string
   - $ref: ./secondFactor.yaml
   - $ref: ./grantDefault.yaml
+required:
+  - secureCode
+  - challenge
+  - deviceTokenID

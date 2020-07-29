@@ -1,9 +1,24 @@
-title: secondFactor
+title: second_factor_required
 type: object
 properties:
   transactionId:
     description: Идентификатор запроса второго фактора
+    type: string    
+  username:
+    description: УНК 
     type: string
-  otp:
-    description: То что пришло в СМС или пуше для второго фактора
+  domain:
+    description: Домен Клиента
     type: string
+  mobile:
+    description: Номер телефона Клиента в маскированном виде 912***6789
+    type: string
+  sessionDataKey:
+    description: Идентификатор сессии входа
+    type: string
+required:
+  - transactionId
+  - username
+  - domain
+  - mobile
+  - sessionDataKey

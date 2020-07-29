@@ -1,5 +1,5 @@
 title: card_number_mb
-description: Вход по номеру банковской карты без пароля
+description: Вход по номеру банковской карты без пароля в МП
 allOf:
   - type: object
     properties:
@@ -9,6 +9,9 @@ allOf:
       password:
         type: string
         description: пароль
+      sessionDataKey:
+        description: Идентификатор сессии входа
+        type: string
     required:
       - cardNumber
 

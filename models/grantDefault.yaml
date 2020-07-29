@@ -1,18 +1,16 @@
 title: grantDefault
 type: object
 description: ''
+x-examples:
+  example-1: {}
 properties:
-  sessionDataKey:
-    description: Идентификатор сессии входа
-    type: string
-    deprecated: true
   scope:
     default: openid
     type: string
     description: Набор данных которые мы хотим получить на основании данного ключа
   grant_type:
     type: string
-    description: "Тип входа:\n* `device_token` вход по пасскоду телефона \n* `refresh_token` обновление токена\n* `login` вход по логину (альясу) или унк + пароль\n* `phone_number` вход по доверенному номеру телефона + пароль\n* `card_number` вход по номеру карты + пароль\nбез пароля для мобильного телефона:\n* `login_mb` \n* `phone_number_mb`\n* `card_number_mb`\n* `token_excange`\n* `token_excange_pwd`"
+    description: "Тип входа:\n* `device_token` вход по коду доступа (пасскод) для МП \n* `refresh_token` обновление JWT-токена (при истечении срока действия)\n* `login` вход по логину (альясу) или унк + пароль (ИБ)\n* `phone_number` вход по доверенному номеру телефона + пароль (ИБ)\n* `card_number` вход по номеру карты + пароль (ИБ)\n* `login_mb` \n* `phone_number_mb` вход по логину (альясу) или унк (без пароля для МП)\n* `card_number_mb` вход по номеру карты (ез пароля для МП)\n* `token_exchange` активация токена устройства (пасскод) и замена JWT-токена (МП)\n* `token_exchange_pwd` восстановление пароля в ИБ"
     enum:
       - device_token
       - refresh_token
@@ -22,7 +20,7 @@ properties:
       - login_mb
       - phone_number_mb
       - card_number_mb
-      - token_excange
-      - token_excange_pwd
+      - token_exchange
+      - token_exchange_pwd
 required:
   - grant_type
