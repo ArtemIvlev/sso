@@ -1,4 +1,4 @@
-title: passcode
+title: device_token
 description: вход по пасскоду в МП
 allOf:
   - type: object
@@ -12,6 +12,9 @@ allOf:
       deviceTokenID:
         description: используется для входа по пасскоду
         type: string
+      biometry:
+        description: вход по TouchId или FaceId
+        type: boolean
   - $ref: ./secondFactor.yaml
   - $ref: ./grantDefault.yaml
 required:
