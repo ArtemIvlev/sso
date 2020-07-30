@@ -1,8 +1,5 @@
 title: grantDefault
 type: object
-description: ''
-x-examples:
-  example-1: {}
 properties:
   scope:
     default: openid

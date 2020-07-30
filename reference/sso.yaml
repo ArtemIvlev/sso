@@ -15,8 +15,8 @@ paths:
         - token-controller
       operationId: getToken
       parameters:
-        - name: Authorization 
-          description: "Basic UsernamePassword. В качестве параметров Username Password для заголовка используются значения clientKey и clientSecret, которые указаны  в настроенном сервис провайдере в WSO2 IS"
+        - name: Authorization
+          description: 'Basic UsernamePassword. В качестве параметров Username Password для заголовка используются значения clientKey и clientSecret, которые указаны  в настроенном сервис провайдере в WSO2 IS'
           in: header
           required: true
           style: simple
@@ -39,39 +39,55 @@ paths:
           explode: false
           schema:
             type: string
-
-        
       responses:
         '200':
-          description: Всё хорошо - получите объект с токенами
+          description: Всё хорошо - объект с токенами
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TokenDto'
-        '400':
-          description: 'Ошибка токена, например, refresh токен уже протух'
+        '400':         
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorDto'
+                $ref: '#/components/schemas/ErrorDtoInvalidGrant'
         '401':
-          description: 'Ошибка входа, например, нужен второй фактор'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorDto'
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorDtoSecondFactorRequired'
+                  - $ref: '#/components/schemas/ErrorDtoAuthenticationFailed'
+                  - $ref: '#/components/schemas/ErrorDtoOtpExpired'
+                  - $ref: '#/components/schemas/ErrorDtoIncorrectPin'
+                  - $ref: '#/components/schemas/ErrorDtoPasswordRequired'              
         '403':
-          description: default response
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ErrorDto'
-        '500':
-          description: "Unknow error (type: 'generic_error')"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorDto'
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorDtoNoMorePinAttempts'
+                  - $ref: '#/components/schemas/ErrorDtoGenericBusinessLogic'
+                  - $ref: '#/components/schemas/ErrorDtoDeviceTokenNotActive'
+                  - $ref: '#/components/schemas/ErrorDtoUserLocked'
+                  - $ref: '#/components/schemas/ErrorDtoSpmAccessDeny'
+                  - $ref: '#/components/schemas/ErrorDtoImsiNotVerified'
+                  - $ref: '#/components/schemas/ErrorDtoCardTypeRestricted'
+                  - $ref: '#/components/schemas/ErrorDtoCardNotValid'
+        '404':
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorDtoCardNotFound'
+                  - $ref: '#/components/schemas/ErrorDtoUserNotFound'
+                  - $ref: '#/components/schemas/ErrorDtoDeviceNotFound'
+        '500':
+          description: Непредвиденная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDtoGenericError'
       description: Получение токена
       security:
         - service-provider: []
@@ -89,6 +105,7 @@ paths:
       operationId: logout
       parameters:
         - name: id_token_hint
+          description: id_token (JWT-токен)
           in: query
           required: true
           style: form
@@ -98,49 +115,152 @@ paths:
       responses:
         '200':
           description: default response
-        '400':
-          description: default response
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ErrorDto'
-        '401':
-          description: default response
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ErrorDto'
-        '403':
-          description: default response
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ErrorDto'
-        '500':
-          description: default response
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ErrorDto'
-      description: Ручка выхода пользователя
+      description: Запрос для выхода пользователя (Logout)
 components:
   schemas:
-    ErrorDto:
+    ErrorDto: 
       type: object
       properties:
         type:
           type: string
           description: Тип ошибки
         message:
-          type: string  
-          description: Текст ошибки   
+          type: string
+          description: Текст ошибки
         message_title:
           type: string
-          description: Заголовок ошибки     
-        additional_properties:
+          description: Заголовок ошибки
+      required:
+        - type
+        - message
+        - message_title
+
+    ErrorDtoInvalidGrant:
+      type: object
+      description: "invalid_grant - Устаревший токен"
+      allOf: 
+        - $ref: '#/components/schemas/ErrorDto'
+    
+    ErrorDtoSecondFactorRequired:
+      description: second_factor_required - требуется второй фактор
+      allOf: 
+        - $ref: '#/components/schemas/ErrorDto'
+        - type: object        
+          properties:       
+                additional_properties:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                      description: УНК
+                    domain:
+                      type: string
+                      description: домен Клиента (master)
+                    transactionId:
+                      type: string
+                      description: идентификатор транзакции (необходим для проверки otp)
+                    mobile:
+                      type: string
+                      description: 'номер мобильного телефона в формате 912***6789'
+                  required:
+                    - username
+                    - domain
+                    - transactionId            
+        
+    ErrorDtoIncorrectPin: 
+      type: object
+      description: Только для МП! incorrect_pin - неверный пасскод (попытки ввода остались)
+      allOf: 
+        - $ref: '#/components/schemas/ErrorDto'
+    
+    ErrorDtoAuthenticationFailed:
+      description: "authentication_failed - ошибка атуентификации"
+      allOf: 
+        - $ref: '#/components/schemas/ErrorDto'
+    
+    ErrorDtoOtpExpired: 
+      type: object
+      description: "otp_expired - otp (код из смс) просрочен"
+      allOf: 
+        - $ref: '#/components/schemas/ErrorDto'
+    
+    ErrorDtoPasswordRequired: 
+      type: object
+      description: Только для МП! password_required - необходимо ввести пароль (скомпрометированный Клиент)
+      allOf: 
+        - $ref: '#/components/schemas/ErrorDto'
+
+    ErrorDtoNoMorePinAttempts: 
+      type: object
+      description: Только для МП! no_more_pin_attempts - Неверный пин (попыток ввода не осталось)
+      allOf: 
+        - $ref: '#/components/schemas/ErrorDto'
+
+    ErrorDtoGenericBusinessLogic: 
+      type: object
+      description: generic_business_logic - Непредвиденная ошибка в бизнес логике
+      allOf: 
+        - $ref: '#/components/schemas/ErrorDto'
+
+    ErrorDtoDeviceTokenNotActive: 
           type: object
-          additionalProperties:
-            type: string
+          description: Только для МП! device_token_not_active - Токен устройства не активен
+          allOf: 
+            - $ref: '#/components/schemas/ErrorDto'
+
+    ErrorDtoUserLocked:
+      description: user_locked - Учетная запись заблокирована
+      allOf: 
+        - $ref: '#/components/schemas/ErrorDto'
+        - type: object        
+          properties:       
+                additional_properties:
+                  type: object
+                  properties:
+                    temporary:
+                      type: boolean
+                      description: Временная блокировка (true) или постоянная (false)
+                            
+    ErrorDtoSpmAccessDeny:
+      description: spm_access_deny - СПМ запретила доступ данному пользователю
+      allOf: 
+        - $ref: '#/components/schemas/ErrorDto'
+
+    ErrorDtoImsiNotVerified:
+      description: imsi_not_verified - Ошибка проверки imsi
+      allOf: 
+        - $ref: '#/components/schemas/ErrorDto'
+    
+    ErrorDtoCardTypeRestricted:
+      description: card_type_restricted - По данной карте доступ запрещен
+      allOf: 
+        - $ref: '#/components/schemas/ErrorDto'
+
+    ErrorDtoCardNotValid:
+      description: card_not_valid - Карта не пригодна для входа
+      allOf: 
+        - $ref: '#/components/schemas/ErrorDto'
+
+    ErrorDtoDeviceNotFound:
+      description: Только для МП! device_not_found - Устройство не найдено
+      allOf: 
+        - $ref: '#/components/schemas/ErrorDto'
+
+    ErrorDtoUserNotFound:
+      description: user_not_found - Учетная запись не найдена
+      allOf: 
+        - $ref: '#/components/schemas/ErrorDto'
+
+    ErrorDtoGenericError:
+      description: generic_error - Непредвиденная ошибка
+      allOf: 
+        - $ref: '#/components/schemas/ErrorDto'
+
+    ErrorDtoCardNotFound:
+      description: card_not_found - Карта не найдена
+      allOf: 
+        - $ref: '#/components/schemas/ErrorDto'
+
     TokenDto:
       type: object
       properties:
