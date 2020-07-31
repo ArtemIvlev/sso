@@ -1,5 +1,5 @@
 title: device_token
-description: вход по пасскоду в МП
+description: device_token - Вход по пасскоду в МП
 allOf:
   - type: object
     properties:

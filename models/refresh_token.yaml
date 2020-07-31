@@ -1,5 +1,5 @@
 title: refresh_token
-description: Обновление JWT-токена (при истечении срока действия)
+description: refresh_token - Обновление JWT-токена (при истечении срока действия)
 allOf:
   - type: object
     properties:

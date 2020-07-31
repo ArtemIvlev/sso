@@ -1,5 +1,5 @@
 title: phone_number_mb
-description: Вход по доверенному номеру телефона без пароля в МП
+description: phone_number_mb - Вход по доверенному номеру телефона без пароля в МП
 allOf:
   - type: object
     properties:

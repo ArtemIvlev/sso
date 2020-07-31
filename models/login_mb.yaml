@@ -1,5 +1,5 @@
 title: login_mb
-description: Вход по логину или унк без пароля в МП
+description: login_mb - Вход по логину или унк без пароля в МП
 allOf:
   - type: object
     properties:

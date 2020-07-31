@@ -1,5 +1,5 @@
 title: card_number
-description: Вход по номеру банковской карты и паролю в ИБ
+description: card_number - Вход по номеру банковской карты и паролю в ИБ
 allOf:
   - $ref: ./card_number_mb.yaml
 required:

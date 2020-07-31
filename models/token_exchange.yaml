@@ -1,6 +1,6 @@
 title: token_exchange
 type: object
-description: 'Активация токена устройства, обмен JWT-токена на новый JWT-токен'
+description: token_exchange - Активация токена устройства, обмен JWT-токена на новый JWT-токен
 properties:
   jwt:
     type: string

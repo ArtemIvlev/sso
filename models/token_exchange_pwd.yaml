@@ -1,5 +1,5 @@
 title: token_exchange_pwd
-description: Обмен токена полученного с временным паролем на целевой токен
+description: token_exchange_pwd - Обмен токена полученного с временным паролем на целевой токен
 allOf:
   - type: object
     properties:

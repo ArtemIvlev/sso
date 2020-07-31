@@ -1,5 +1,5 @@
 title: card_number_mb
-description: Вход по номеру банковской карты без пароля в МП
+description: card_number_mb - Вход по номеру банковской карты без пароля в МП
 allOf:
   - type: object
     properties:
