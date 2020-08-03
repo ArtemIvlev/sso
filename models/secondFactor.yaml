@@ -1,20 +1,14 @@
-title: second_factor_required
+title: Данные для проверки второго фактора
 type: object
 properties:
   transactionId:
     description: Идентификатор запроса второго фактора
     type: string    
-  username:
-    description: УНК 
-    type: string
-  domain:
-    description: Домен Клиента
-    type: string
-  mobile:
-    description: Номер телефона Клиента в маскированном виде 912***6789
-    type: string
   sessionDataKey:
     description: Идентификатор сессии входа
+    type: string
+  otp:
+    description: Одноразовый код подтверждения из смс
     type: string
 required:
   - transactionId
