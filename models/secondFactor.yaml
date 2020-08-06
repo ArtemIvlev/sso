@@ -1,4 +1,4 @@
-title: Данные для проверки второго фактора
+title: Second factor data
 type: object
 properties:
   transactionId:

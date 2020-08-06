@@ -142,7 +142,7 @@ components:
 
     ErrorDtoInvalidGrant:
       type: object
-      description: "invalid_grant - Устаревший токен"
+      description: "invalid_grant - Неверное значение grant_type"
       allOf: 
         - $ref: '#/components/schemas/ErrorDto'
     
@@ -167,10 +167,14 @@ components:
                     mobile:
                       type: string
                       description: 'номер мобильного телефона в формате 912***6789'
+                    sessionDataKey:
+                      type: string
+                      description: Идентификатор сессии входа
                   required:
                     - username
                     - domain
-                    - transactionId            
+                    - transactionId  
+                    - sessionDataKey          
         
     ErrorDtoIncorrectPin: 
       type: object
