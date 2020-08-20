@@ -9,5 +9,6 @@ oneOf:
   - $ref: ./refresh_token.yaml
   - $ref: ./phone_number.yaml
   - $ref: ./phone_number_mb.yaml  
+  - $ref: ./qr_auth.yaml
 discriminator:
   propertyName: grant_type

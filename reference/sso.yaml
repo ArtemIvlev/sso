@@ -24,7 +24,55 @@ paths:
           schema:
             type: string
         - name: X-Device-FingerPrint
-          description: base64 упакованный JSON объект описания устройства с которого пользователь входит. Данные получаются из библиотеки
+          description: Для МП. base64 упакованный JSON объект описания устройства с которого пользователь входит. 
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: Accept
+          description: для ИБ
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: Accept-Encoding
+          description: для ИБ
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: Accept-Language
+          description: для ИБ
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: Referer
+          description: для ИБ
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: User-Agent
+          description: для ИБ
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: X-Forwarded-For
+          description: для ИБ. Ip адрес 
           in: header
           required: false
           style: simple
