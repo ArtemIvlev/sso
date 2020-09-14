@@ -13,3 +13,17 @@ allOf:
       - phoneNumber
   - $ref: ./grantDefault.yaml
   - $ref: ./secondFactor.yaml
+x-examples:
+  Example (1FA):
+    phoneNumber: string
+    password: string
+    scope: openid
+    grant_type: phone_number_mb
+  Example (2FA):
+    phoneNumber: string
+    password: string
+    scope: openid
+    grant_type: phone_number_mb
+    transactionId: string
+    sessionDataKey: string
+    otp: string

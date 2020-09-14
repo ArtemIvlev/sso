@@ -3,12 +3,18 @@ description: qr_auth - аутентификация по QR-коду в ИБ
 allOf:
   - type: object
     properties:
-        jwt:
-         type: string
-         description: Токен, полученный при аутентификации пользователя в МП
-        User-Agent:
-         type: string
-         description: Информация user-agent с ИБ   
+      jwt:
+        type: string
+        description: 'Токен, полученный при аутентификации пользователя в МП'
+      User-Agent:
+        type: string
+        description: Информация user-agent с ИБ
   - $ref: ./grantDefault.yaml
 required:
   - jwt
+x-examples:
+  Example (1FA):
+    jwt: string
+    User-Agent: string
+    scope: openid
+    grant_type: qr_auth

@@ -7,17 +7,27 @@ properties:
     description: Набор данных которые мы хотим получить на основании данного ключа
   grant_type:
     type: string
-    description: "Тип входа:\n* `device_token` вход по коду доступа (пасскод) для МП \n* `refresh_token` обновление JWT-токена (при истечении срока действия)\n* `login` вход по логину (альясу) или унк + пароль (ИБ)\n* `phone_number` вход по доверенному номеру телефона + пароль (ИБ)\n* `card_number` вход по номеру карты + пароль (ИБ)\n* `login_mb` \n* `phone_number_mb` вход по логину (альясу) или унк (без пароля для МП)\n* `card_number_mb` вход по номеру карты (ез пароля для МП)\n* `token_exchange` активация токена устройства (пасскод) и замена JWT-токена (МП)\n* `token_exchange_pwd` восстановление пароля в ИБ\n* `qr_auth` аутентификация по QR-коду в ИБ"
+    description: |
+      Тип входа:
+        * `device_token` вход по коду доступа (пасскод) для МП
+        * `refresh_token` обновление JWT-токена (при истечении срока действия)
+        * `login` вход по логину (альясу) или унк + пароль (ИБ)
+        * `phone_number` вход по доверенному номеру телефона + пароль (ИБ)
+        * `card_number` вход по номеру карты + пароль (ИБ)
+        * `login_mb`
+        * `phone_number_mb` вход по логину (альясу) или унк (без пароля для МП)
+        * `card_number_mb` вход по номеру карты (ез пароля для МП)
+        * `token_exchange_pwd` восстановление пароля в ИБ
+        * `qr_auth` аутентификация по QR-коду в ИБ"
     enum:
-      - device_token
       - refresh_token
+      - device_token
       - login
       - phone_number
       - card_number
       - login_mb
       - phone_number_mb
       - card_number_mb
-      - token_exchange
       - token_exchange_pwd
       - qr_auth
 required:

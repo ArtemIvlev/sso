@@ -24,7 +24,7 @@ paths:
           schema:
             type: string
         - name: X-Device-FingerPrint
-          description: Для МП. base64 упакованный JSON объект описания устройства с которого пользователь входит. 
+          description: Для МП. base64 упакованный JSON объект описания устройства с которого пользователь входит.
           in: header
           required: false
           style: simple
@@ -72,7 +72,7 @@ paths:
           schema:
             type: string
         - name: X-Forwarded-For
-          description: для ИБ. Ip адрес 
+          description: для ИБ. Ip адрес
           in: header
           required: false
           style: simple
@@ -99,7 +99,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TokenDto'
-        '400':         
+        '400':
           content:
             application/json:
               schema:
@@ -113,7 +113,7 @@ paths:
                   - $ref: '#/components/schemas/ErrorDtoAuthenticationFailed'
                   - $ref: '#/components/schemas/ErrorDtoOtpExpired'
                   - $ref: '#/components/schemas/ErrorDtoIncorrectPin'
-                  - $ref: '#/components/schemas/ErrorDtoPasswordRequired'              
+                  - $ref: '#/components/schemas/ErrorDtoPasswordRequired'
         '403':
           content:
             application/json:
@@ -171,7 +171,7 @@ paths:
       description: Запрос для выхода пользователя (Logout)
 components:
   schemas:
-    ErrorDto: 
+    ErrorDto:
       type: object
       properties:
         type:
@@ -187,137 +187,225 @@ components:
         - type
         - message
         - message_title
-
     ErrorDtoInvalidGrant:
       type: object
-      description: "invalid_grant - Неверное значение grant_type"
-      allOf: 
+      description: invalid_grant - Неверное значение grant_type
+      allOf:
         - $ref: '#/components/schemas/ErrorDto'
-    
+      x-examples:
+        example-1:
+          type: invalid_grant
+          message: string
+          message_title: string
     ErrorDtoSecondFactorRequired:
       description: second_factor_required - требуется второй фактор
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/ErrorDto'
-        - type: object        
-          properties:       
-                additional_properties:
-                  type: object
-                  properties:
-                    username:
-                      type: string
-                      description: УНК
-                    domain:
-                      type: string
-                      description: домен Клиента (master)
-                    transactionId:
-                      type: string
-                      description: идентификатор транзакции (необходим для проверки otp)
-                    mobile:
-                      type: string
-                      description: 'номер мобильного телефона в формате 912***6789'
-                    sessionDataKey:
-                      type: string
-                      description: Идентификатор сессии входа
-                  required:
-                    - username
-                    - domain
-                    - transactionId  
-                    - sessionDataKey          
-        
-    ErrorDtoIncorrectPin: 
-      type: object
+        - type: object
+          properties:
+            additional_properties:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: УНК
+                domain:
+                  type: string
+                  description: домен Клиента (master)
+                transactionId:
+                  type: string
+                  description: идентификатор транзакции (необходим для проверки otp)
+                mobile:
+                  type: string
+                  description: номер мобильного телефона в формате 912***6789
+                sessionDataKey:
+                  type: string
+                  description: Идентификатор сессии входа
+              required:
+                - username
+                - domain
+                - transactionId
+                - sessionDataKey
+      x-examples:
+        example-1:
+          type: second_factor_required
+          message: string
+          message_title: string
+          additional_properties:
+            username: string
+            domain: string
+            transactionId: string
+            mobile: string
+            sessionDataKey: string
+    ErrorDtoIncorrectPin:
       description: Только для МП! incorrect_pin - неверный пасскод (попытки ввода остались)
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/ErrorDto'
-    
+        - type: object
+          properties:
+            additiona_properties:
+              type: object
+              properties:
+                remainingPinAttempts:
+                  type: integer
+          x-examples:
+            example-1:
+              type: incorrect_pin
+              message: string
+              message_title: string
+              additional_properties:
+                remainingPinAttempts: 3
     ErrorDtoAuthenticationFailed:
-      description: "authentication_failed - ошибка атуентификации"
-      allOf: 
+      description: authentication_failed - ошибка атуентификации
+      allOf:
         - $ref: '#/components/schemas/ErrorDto'
-    
-    ErrorDtoOtpExpired: 
+      x-examples:
+        Example:
+          type: authentication_failed
+          message: string
+          message_title: string
+    ErrorDtoOtpExpired:
       type: object
-      description: "otp_expired - otp (код из смс) просрочен"
-      allOf: 
+      description: otp_expired - otp (код из смс) просрочен
+      allOf:
         - $ref: '#/components/schemas/ErrorDto'
-    
-    ErrorDtoPasswordRequired: 
+      x-examples:
+        example-1:
+          type: otp_expired
+          message: string
+          message_title: string
+    ErrorDtoPasswordRequired:
       type: object
       description: Только для МП! password_required - необходимо ввести пароль (скомпрометированный Клиент)
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/ErrorDto'
-
-    ErrorDtoNoMorePinAttempts: 
+      x-examples:
+        example-1:
+          type: password_required
+          message: string
+          message_title: string
+    ErrorDtoNoMorePinAttempts:
       type: object
       description: Только для МП! no_more_pin_attempts - Неверный пин (попыток ввода не осталось)
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/ErrorDto'
-
-    ErrorDtoGenericBusinessLogic: 
+      x-examples:
+        example-1:
+          type: no_more_pin_attempts
+          message: string
+          message_title: string
+    ErrorDtoGenericBusinessLogic:
       type: object
       description: generic_business_logic - Непредвиденная ошибка в бизнес логике
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/ErrorDto'
-
-    ErrorDtoDeviceTokenNotActive: 
-          type: object
-          description: Только для МП! device_token_not_active - Токен устройства не активен
-          allOf: 
-            - $ref: '#/components/schemas/ErrorDto'
-
+      x-examples:
+        Example:
+          type: generic_business_logic
+          message: string
+          message_title: string
+    ErrorDtoDeviceTokenNotActive:
+      type: object
+      description: Только для МП! device_token_not_active - Токен устройства не активен
+      allOf:
+        - $ref: '#/components/schemas/ErrorDto'
+      x-examples:
+        Example:
+          type: device_token_not_active
+          message: string
+          message_title: string
     ErrorDtoUserLocked:
       description: user_locked - Учетная запись заблокирована
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/ErrorDto'
-        - type: object        
-          properties:       
-                additional_properties:
-                  type: object
-                  properties:
-                    temporary:
-                      type: boolean
-                      description: Временная блокировка (true) или постоянная (false)
-                            
+        - type: object
+          properties:
+            additional_properties:
+              type: object
+              properties:
+                temporary:
+                  type: boolean
+                  description: Временная блокировка (true) или постоянная (false)
+      title: ''
+      x-examples:
+        example-1:
+          type: user_locked
+          message: string
+          message_title: string
+          additional_properties:
+            lock: PERMANENT
     ErrorDtoSpmAccessDeny:
       description: spm_access_deny - СПМ запретила доступ данному пользователю
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/ErrorDto'
-
+      x-examples:
+        example-1:
+          type: spm_access_deny
+          message: string
+          message_title: string
     ErrorDtoImsiNotVerified:
       description: imsi_not_verified - Ошибка проверки imsi
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/ErrorDto'
-    
+      x-examples:
+        Example:
+          type: imsi_not_verified
+          message: string
+          message_title: string
     ErrorDtoCardTypeRestricted:
       description: card_type_restricted - По данной карте доступ запрещен
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/ErrorDto'
-
+      x-examples:
+        Example:
+          type: card_type_restricted
+          message: string
+          message_title: string
     ErrorDtoCardNotValid:
       description: card_not_valid - Карта не пригодна для входа
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/ErrorDto'
-
+      x-examples:
+        Example:
+          type: card_not_valid
+          message: string
+          message_title: string
     ErrorDtoDeviceNotFound:
       description: Только для МП! device_not_found - Устройство не найдено
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/ErrorDto'
-
+      x-examples:
+        Example:
+          type: device_not_found
+          message: string
+          message_title: string
     ErrorDtoUserNotFound:
       description: user_not_found - Учетная запись не найдена
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/ErrorDto'
-
+      x-examples:
+        example-1:
+          type: user_not_found
+          message: string
+          message_title: string
     ErrorDtoGenericError:
       description: generic_error - Непредвиденная ошибка
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/ErrorDto'
-
+      x-examples:
+        Example:
+          type: generic_error
+          message: string
+          message_title: string
     ErrorDtoCardNotFound:
       description: card_not_found - Карта не найдена
-      allOf: 
+      allOf:
         - $ref: '#/components/schemas/ErrorDto'
-
+      x-examples:
+        Example:
+          type: card_not_found
+          message: string
+          message_title: string
     TokenDto:
       type: object
       properties:

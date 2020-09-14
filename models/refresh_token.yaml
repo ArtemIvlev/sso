@@ -3,9 +3,14 @@ description: refresh_token - Обновление JWT-токена (при ис�
 allOf:
   - type: object
     properties:
-        refresh_token:
-          type: string
-          description: 'Reftesh токен, в случае запроса с grant_type: refresh_token. Для обновления JWT'
+      refresh_token:
+        type: string
+        description: 'Reftesh токен, в случае запроса с grant_type: refresh_token. Для обновления JWT'
   - $ref: ./grantDefault.yaml
 required:
   - refresh_token
+x-examples:
+  Example:
+    refresh_token: b9b8895e-c37c-3db5-a43b-5e9dbecae086
+    scope: openid
+    grant_type: refresh_token
