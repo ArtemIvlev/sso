@@ -102,11 +102,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/TokenDto'
         '400':
+          description: .
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDtoInvalidGrant'
         '401':
+          description: .
           content:
             application/json:
               schema:
@@ -117,6 +119,7 @@ paths:
                   - $ref: '#/components/schemas/ErrorDtoIncorrectPin'
                   - $ref: '#/components/schemas/ErrorDtoPasswordRequired'
         '403':
+          description: .
           content:
             application/json:
               schema:
@@ -130,6 +133,7 @@ paths:
                   - $ref: '#/components/schemas/ErrorDtoCardTypeRestricted'
                   - $ref: '#/components/schemas/ErrorDtoCardNotValid'
         '404':
+          description: .
           content:
             application/json:
               schema:
