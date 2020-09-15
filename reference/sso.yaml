@@ -84,6 +84,8 @@ paths:
           required: true
           style: form
           explode: true
+          schema:
+            type: string
         - name: Content-Type
           description: тип контента запроса
           in: header
