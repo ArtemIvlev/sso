@@ -13,7 +13,7 @@ allOf:
       - login
   - $ref: ./grantDefault.yaml
 x-examples:
-  Example (1FA):
+  Example 1FA:
     jwt: string
     password: string
     scope: openid

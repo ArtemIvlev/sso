@@ -13,7 +13,7 @@ allOf:
 required:
   - jwt
 x-examples:
-  Example (1FA):
+  Example 1FA:
     jwt: string
     User-Agent: string
     scope: openid

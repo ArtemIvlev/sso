@@ -12,12 +12,4 @@ oneOf:
   - $ref: ./qr_auth.yaml
 discriminator:
   propertyName: grant_type
-x-examples:
-  example-1:
-    login: string
-    password: string
-    scope: openid
-    grant_type: refresh_token
-    transactionId: string
-    sessionDataKey: string
-    otp: string
+

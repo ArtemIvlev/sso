@@ -5,12 +5,12 @@ allOf:
 required:
   - password
 x-examples:
-  Example (1FA):
+  Example 1FA:
     phoneNumber: string
     password: string
     scope: openid
     grant_type: phone_number
-  Example (2FA):
+  Example 2FA:
     phoneNumber: string
     password: string
     scope: openid
