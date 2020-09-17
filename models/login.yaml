@@ -4,17 +4,4 @@ allOf:
   - $ref: ./login_mb.yaml
 required:
   - password
-x-examples:
-  Example 2FA:
-    login: string
-    password: string
-    scope: openid
-    grant_type: login
-    transactionId: '5643435436676'
-    sessionDataKey: 523ce15c-2ead-4864-8af7-1e8b6ea2e8d9
-    otp: '543216'
-  Example 1FA:
-    login: string
-    password: string
-    scope: openid
-    grant_type: login
+
