@@ -8,7 +8,16 @@ oneOf:
   - $ref: ./token_exchange_pwd.yaml
   - $ref: ./refresh_token.yaml
   - $ref: ./phone_number.yaml
-  - $ref: ./phone_number_mb.yaml  
+  - $ref: ./phone_number_mb.yaml
   - $ref: ./qr_auth.yaml
 discriminator:
   propertyName: grant_type
+x-examples:
+  example-1:
+    login: string
+    password: string
+    scope: openid
+    grant_type: refresh_token
+    transactionId: string
+    sessionDataKey: string
+    otp: string
