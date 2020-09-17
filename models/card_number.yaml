@@ -4,17 +4,4 @@ allOf:
   - $ref: ./card_number_mb.yaml
 required:
   - password
-x-examples:
-  Example 1FA:
-    cardNumber: string
-    password: string
-    scope: openid
-    grant_type: card_number_mb
-  Example 2FA:
-    cardNumber: string
-    password: string
-    sessionDataKey: string
-    scope: openid
-    grant_type: card_number_mb
-    transactionId: string
-    otp: string
+
