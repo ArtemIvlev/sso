@@ -1,0 +1,22 @@
+title: Individual
+description: Модель про физ лицо
+allOf:
+  - properties:
+      birthDate:
+        type: string
+        format: date-time
+        description: Дата рождения
+      givenName:
+        type: string
+        description: Имя
+      familyName:
+        type: string
+        description: Фамилия
+      middleName:
+        type: string
+        description: Отчество
+      phoneNumber:
+        type: string
+      email:
+        type: string
+type: object
