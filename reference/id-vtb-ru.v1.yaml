@@ -1,13 +1,13 @@
 openapi: 3.0.0
 info:
-  title: id-vtb-ru
-  version: '1.0'
+  title: API id.vtb.ru
+  version: 0.1.0
 servers:
   - url: 'http://localhost:3000'
 paths:
   /oauth2/ac:
     get:
-      summary: Your GET endpoint
+      summary: OAUTH 2.0  для партнеров
       tags: []
       responses:
         '200':
@@ -58,8 +58,9 @@ paths:
             type: string
           in: query
           name: auth_value
+      description: 'В случае входа по номеру телефона, если данного телефона нет в соответствующем домене - создается новая учетная запись '
     post:
-      summary: OAUTH2 аутентификация с доп параметрами
+      summary: OAUTH 2.0  для партнеров с возможностью передать перс данные для регистрации.
       description: |-
         Вход с заполнением профиля.
         Появится только после выхода Цифрового профиля в прод
