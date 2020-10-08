@@ -13,9 +13,56 @@ paths:
         '200':
           description: OK
       operationId: ''
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: scope
+          description: 'разрешения, позволяющие провести аутентификацию (openid) и получить данные о пользователе '
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: response_type
+          description: 'параметр, определяющий, что мы хотим получить авторизационный код'
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: redirect_uri
+          description: 'адрес, на который должен быть возвращен пользователь после проведения аутентификации (URL encoded)'
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: state
+          description: набор случайных символов
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: client_id
+          description: 'идентификатор вас как партнера ВТБ ID, заданный в параметрах приложеия'
+          required: true
+        - schema:
+            type: string
+            enum:
+              - login
+              - ucn
+              - phone
+              - cardnumber
+          in: query
+          name: auth_by
+          description: ''
+        - schema:
+            type: string
+          in: query
+          name: auth_value
     post:
       summary: OAUTH2 аутентификация с доп параметрами
-      description: ''
+      description: |-
+        Вход с заполнением профиля.
+        Появится только после выхода Цифрового профиля в прод
       requestBody:
         content:
           application/x-www-form-urlencoded:
