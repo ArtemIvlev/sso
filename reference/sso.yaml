@@ -23,10 +23,18 @@ paths:
           explode: false
           schema:
             type: string
-        - name: X-Device-FingerPrint
-          description: Для МП. base64 упакованный JSON объект описания устройства с которого пользователь входит.
+        - name: x-finger-print
+          description: <b>Для ИБ</b>. Строка сгенерированная в ИБ в base64 (свойства браузера пользователя)
           in: header
-          required: false
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: X-Device-FingerPrint
+          description: <b>Для МП</b>. Упакованный JSON объект в base64 - описание устройства, с которого входит пользователь.
+          in: header
+          required: true
           style: simple
           explode: false
           schema:
