@@ -337,9 +337,9 @@ components:
             additional_properties:
               type: object
               properties:
-                temporary:
-                  type: boolean
-                  description: Временная блокировка (true) или постоянная (false)
+                lock:
+                  type: string
+                  description: Временная блокировка (TEMPORARY) или постоянная (PERMANENT)
       title: ''
       x-examples:
         example-1:
