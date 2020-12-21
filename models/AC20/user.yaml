@@ -1,0 +1,16 @@
+title: Запись пользователя
+description: Основная запись о пользователе
+allOf:
+  - type: object
+    properties:
+      ucn:
+        type: integer
+      alias:
+        type: string
+        description: Логин пользователя
+      history:
+        type: array
+        items:
+          $ref: ./password_history.yaml
+  - $ref: phone_number.yaml
+  - $ref: password.yaml

@@ -1,0 +1,10 @@
+title: lock
+type: object
+properties:
+  lock_time:
+    type: string
+    format: date-time
+  lock_reason_code:
+    type: number
+  lock_reason_comment:
+    type: string
