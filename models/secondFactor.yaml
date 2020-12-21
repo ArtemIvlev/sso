@@ -1,9 +1,12 @@
-title: secondFactor
+title: Second factor data
 type: object
 properties:
   transactionId:
     description: Идентификатор запроса второго фактора
+    type: string    
+  sessionDataKey:
+    description: Идентификатор сессии входа
     type: string
   otp:
-    description: То что пришло в СМС или пуше для второго фактора
+    description: Одноразовый код подтверждения из смс
     type: string

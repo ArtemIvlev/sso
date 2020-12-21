@@ -1,6 +1,7 @@
 title: login
-description: Вход по логину или унк
+description: login - Вход по логину или унк с паролем в ИБ
 allOf:
   - $ref: ./login_mb.yaml
 required:
   - password
+

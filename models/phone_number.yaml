@@ -1,7 +1,20 @@
 title: phone_number
-description: Вход по доверенному номеру телефона
+description: phone_number - Вход по доверенному номеру телефона в ИБ
 allOf:
   - $ref: ./phone_number_mb.yaml
 required:
   - password
-
+x-examples:
+  Example 1FA:
+    phoneNumber: string
+    password: string
+    scope: openid
+    grant_type: phone_number
+  Example 2FA:
+    phoneNumber: string
+    password: string
+    scope: openid
+    grant_type: phone_number
+    transactionId: string
+    sessionDataKey: string
+    otp: string

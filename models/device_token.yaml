@@ -1,18 +1,8 @@
-title: passcode
-description: вход по пасскоду
+title: device_token
+description: device_token - Вход по пасскоду в МП
 allOf:
   - type: object
     properties:
-      unk:
-        description: УНК
-        type: string
-        deprecated: true
-      ucn:
-        description: УНК
-        type: string
-      biometry:
-        type: boolean
-        description: Является ли вход по faceId или TouchId
       secureCode:
         description: используется для входа по пасскоду
         type: string
@@ -22,5 +12,30 @@ allOf:
       deviceTokenID:
         description: используется для входа по пасскоду
         type: string
+      biometry:
+        description: вход по TouchId или FaceId
+        type: boolean
   - $ref: ./secondFactor.yaml
   - $ref: ./grantDefault.yaml
+required:
+  - secureCode
+  - challenge
+  - deviceTokenID
+x-examples:
+  Example (1FA):
+    secureCode: '12345'
+    challenge: '54321'
+    deviceTokenID: '0000900100000000223400'
+    biometry: true
+    scope: openid
+    grant_type: device_token
+  Example (2FA):
+    secureCode: '12345'
+    challenge: '54321'
+    deviceTokenID: '0000900100000000223400'
+    biometry: true
+    transactionId: '5643435436676'
+    sessionDataKey: 523ce15c-2ead-4864-8af7-1e8b6ea2e8d9
+    otp: '543216'
+    scope: openid
+    grant_type: device_token
