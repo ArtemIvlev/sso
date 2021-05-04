@@ -85,7 +85,7 @@ paths:
 
         Поддерживает несколько способов аутентификации. Список обязательных параметров изменяется в зависимости от используемого типа. 
 
-        Поддержка многофакторной аутентификации. В случае, если в ответе пришел тип ошибки second_factor_required, это означает, что необходимо выполнить запрос повторно, с дополнительными параметрами. 
+        Поддержка многофакторной аутентификации. В случае, если в ответе пришел тип ошибки second_factor_required, это означает, что необходимо выполнить запрос повторно, с дополнительными параметрами. (см. пример SecondFactorLoginTokenRequest)
 
         Перед использованием АПИ, перед интеграцией, необходимо Ваше приложение зарегистрировать в сервисе авторизации. После чего Вы получите пару clientKey,clientSecret, которые сможете использовать в запросах.
       security:
@@ -164,6 +164,15 @@ paths:
                   grant_type: card_restore_pwd
                   scope: openid
                   cardNumber: '4111111116111611'
+              SecondFactorLoginTokenRequest:
+                value:
+                  grant_type: login
+                  scope: openid
+                  otp: '13234'
+                  transactionId: '7235196120550406583'
+                  sessionDataKey: 13fac7a9-0e91-4411-aa9b-43b2f9cb4abe
+                  login: string
+                  password: string
       parameters:
         - schema:
             type: string
@@ -380,7 +389,7 @@ components:
         - phone_number_client
         - guest_not_found
         - user_disabled
-      description: |+
+      description: |
         - generic_error - Возникла непредвиденная ошибка 
         - generic_business_logic - Возникла ошибка бизнес-логики. Определяет общий тип всех ошибок подобного типа
         - invalid_grant - означает, redirectUri, указанных в параметрах зарегистрированного клиента приложения, не совпадает с тем. что пришел в запросе
@@ -402,7 +411,6 @@ components:
         - card_type_restricted - По указанному типу карты невозможно произвести вход
         - user_discredited - аккаунт пользователя дискредитирован 
         - guest_not_found - учетка клиента Лайт не найдена 
-
     UserLockType:
       type: string
       title: UserLockType
