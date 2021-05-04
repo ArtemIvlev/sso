@@ -1,7 +1,9 @@
 openapi: 3.1.0
 info:
-  title: sso
+  title: SSO server
   version: '1.0'
+  description: ''
+  summary: 'API сервера авторизации '
 servers:
   - url: 'http://localhost:3000'
 paths:
