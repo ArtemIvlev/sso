@@ -5,10 +5,13 @@ oneOf:
   - $ref: ./device_token.yaml
   - $ref: ./login_mb.yaml
   - $ref: ./card_number_mb.yaml
-  - $ref: ./token_exchange.yaml
+  - $ref: ./token_exchange_pwd.yaml
   - $ref: ./refresh_token.yaml
   - $ref: ./phone_number.yaml
-  - $ref: ./phone_number_mb.yaml  
+  - $ref: ./phone_number_mb.yaml
   - $ref: ./qr_auth.yaml
+  - $ref: ./guest_auth.yaml
+  - $ref: ./guest_smb_auth.yaml
 discriminator:
   propertyName: grant_type
+

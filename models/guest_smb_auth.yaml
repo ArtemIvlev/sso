@@ -1,0 +1,13 @@
+title: guest_smb_auth
+type: object
+description: guest_smb_auth - Вход гостя по номеру телефона в СМБ ВТБ Онлайн
+allOf:
+ - type: object
+   properties:
+     phoneNumber:
+       type: string
+       description: Доверенный номер телефона (10 || 11 символов)   
+   required:
+     - phoneNumber
+ - $ref: ./grantDefault.yaml
+ - $ref: ./secondFactor.yaml

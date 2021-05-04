@@ -4,3 +4,4 @@ allOf:
   - $ref: ./card_number_mb.yaml
 required:
   - password
+

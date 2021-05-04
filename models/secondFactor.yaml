@@ -10,9 +10,3 @@ properties:
   otp:
     description: Одноразовый код подтверждения из смс
     type: string
-required:
-  - transactionId
-  - username
-  - domain
-  - mobile
-  - sessionDataKey

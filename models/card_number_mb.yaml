@@ -5,7 +5,7 @@ allOf:
     properties:
       cardNumber:
         type: string
-        description: номер карты 
+        description: номер карты
       password:
         type: string
         description: пароль
@@ -14,6 +14,19 @@ allOf:
         type: string
     required:
       - cardNumber
-
   - $ref: ./grantDefault.yaml
   - $ref: ./secondFactor.yaml
+x-examples:
+  Example 1FA:
+    cardNumber: string
+    password: string
+    scope: openid
+    grant_type: card_number_mb
+  Example 2FA:
+    cardNumber: string
+    password: string
+    sessionDataKey: string
+    scope: openid
+    grant_type: card_number_mb
+    transactionId: string
+    otp: string

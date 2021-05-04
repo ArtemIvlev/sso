@@ -4,3 +4,4 @@ allOf:
   - $ref: ./login_mb.yaml
 required:
   - password
+
