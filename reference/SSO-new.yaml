@@ -1,0 +1,417 @@
+openapi: 3.1.0
+info:
+  title: sso
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /oauth2/token:
+    post:
+      summary: TokenRequest
+      operationId: post-oauth2-token
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+              examples:
+                SuccessResponse:
+                  value:
+                    scope: openid
+                    access_token: b2c216a2-c0f8-41cd-88e6-ae4a298f8113
+                    refresh_token: d2f8295b-fd2e-49d1-921f-90914aeeaec3
+                    id_token: eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMDAxMTYxNCIsImF1ZCI6Imo4Yk9vWjJ5MUZod0VLUGNhRlNTZ1lIRmJmb2EiLCJhY3IiOiJtc2E9ZXlKWUxWVnpaWEl0VTJWemMybHZiaTFKUkNJNkltTmxNVGxqWldZeUxUYzRaakF0TkRnMk5DMWhPRFF6TFRrMU1XRTVPR000TURJeE5TSXNJbkp2ZFhSbFRtRnRaU0k2SW1SbFptRjFiSFFpTENKemFHRnlaRTVoYldVaU9pSnpPQ0lzSWxndFVrOVZWRVV0VGtGTlJTSTZJbVJsWm1GMWJIUWlMQ0pZTFZOSVFWSkVMVTVCVFVVaU9pSnpPQ0lzSWxndFJHVmlkV2NpT2lKbVlXeHpaU0lzSWxndFNXNXBkR2xoZEc5eUxVaHZjM1FpT2lJeE1DNHhPRGN1Tnk0eU1ETWlMQ0pZTFVOb1lXNXVaV3dpT2lKTmIySnBiR1ZDWVc1ck1pSXNJbGd0VUd4aGRHWnZjbTBpT2lKcFQxTWlMQ0pZTFV4dloybHVMVTF2WkdVaU9tNTFiR3dzSWxndFZtVnljMmx2YmlJNmJuVnNiQ3dpV0MxU2IyeGxjeUk2Ym5Wc2JDd2lTRVZCUkVWU01TSTZJblJ5ZFdVaUxDSklSVUZFUlZJeUlqb2lkR1Z6ZEhOMGNtbHVaeUo5IiwiYW1yIjpbImRldmljZV90b2tlbiJdLCJhenAiOiJqOGJPb1oyeTFGaHdFS1BjYUZTU2dZSEZiZm9hIiwic3BfbmFtZSI6Im1vYmlsZS1iYW5rIiwiZG9tYWluIjoibWFzdGVyIiwiYXV0aF9zZXNzaW9uX2lkIjoiN2M5Nzg1ZDItZjkzNS00YTQxLTlmZmEtYjRjYzcxYWU0MTA0IiwidXNlcl9maW5nZXJwcmludCI6ImYwY2FhYzNlMWI0YzQ1YTUxZmFhNTM4ZTA5NGJlNzExZTk2Y2RiN2M5Njg3ZWI2ZjQwZDg1ZWY0YWZkMjQ3M2EiLCJtc2Ffc2Vzc2lvbl9pZCI6ImNlMTljZWYyLTc4ZjAtNDg2NC1hODQzLTk1MWE5OGM4MDIxNSIsImlzcyI6Imh0dHA6Ly9rMy1hYy13ZWJzc28vIiwibmJmIjoxNjE5Nzc2ODU4LCJleHAiOjE2MTk3NzcyMTgsImlhdCI6MTYxOTc3Njg1OH0.iVSUIdHfa1lh6RKvFQ3CBEm7yQYXF4A67eF4QHbWeGjVP2Pg8iv8N3up1_ZjgmthLRx9idVw1AlQFZUrN8ECZt4pUodyDpg_b0-6Ir3Mncw8uvKHrdHHQ6MtjkW0Sdqu-v2r2jeY3zY-6W-N92c4UgMJ2IP8T7jIprTdhDCpIfmdTX24FS-KRrgGPZZ2pUiheAXcQdRaMnojs4Gm5Vq9EvaPwjK9wwtF8AglfRplFwjl2rwoVYUo7lpR__nUA6nXcNMvhvlGwfCn9-WCDChksValMr-ghwopCQL1WATgWwvP9v4K6Uwaghynk36RpnlAe1E4prhX9gHJX4J8ACWLgg
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                IcorrectPinErrorResponse:
+                  value:
+                    type: incorrect_pin
+                    message: string
+                    message_title: string
+                AuthenticationFailedErrorResponse:
+                  value:
+                    type: authentication_failed
+                    message: string
+                    message_title: string
+                PasswordExpiredErrorRespons:
+                  value:
+                    type: password_expired
+                    message: string
+                    message_title: string
+                OtpExpiredErrorResponse:
+                  value:
+                    type: otp_expired
+                    message: string
+                    message_title: string
+                SecondFactorRequiredErrorResponse:
+                  value:
+                    type: second_factor_required
+                    message: string
+                    message_title: string
+                    additional_properties:
+                      domain: master
+                      sessionDataKey: 13fac7a9-0e91-4411-aa9b-43b2f9cb4abe
+                      username: '20007030'
+                      transactionId: '7235196120550406583'
+                      mobile: +7 996 ***-25-62
+                UserLockedErrorResponse:
+                  value:
+                    type: user_locked
+                    message: string
+                    message_title: string
+                    additional_properties:
+                      lock: PERMANENT
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      description: |-
+        Метод для получения токенов доступа
+
+        Поддерживает несколько способов аутентификации. Список обязательных параметров изменяется в зависимости от используемого типа. 
+
+        Поддержка многофакторной аутентификации. В случае, если в ответе пришел тип ошибки second_factor_required, это означает, что необходимо выполнить запрос повторно, с дополнительными параметрами. 
+
+        Перед использованием АПИ, перед интеграцией, необходимо Ваше приложение зарегистрировать в сервисе авторизации. После чего Вы получите пару clientKey,clientSecret, которые сможете использовать в запросах.
+      security:
+        - ClientAuthorization: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+            examples:
+              LoginTokenRequest:
+                value:
+                  grant_type: login
+                  scope: openid
+                  login: '20002034'
+                  password: 123123Qw1
+              CardNumberTokenRequest:
+                value:
+                  grant_type: card_number
+                  scope: openid
+                  cardNumber: '4111111116111611'
+                  password: 123123Qw1
+              PhoneNumberTokenRequest:
+                value:
+                  grant_type: phone_number
+                  scope: openid
+                  phoneNumber: '9153933773'
+                  password: 123123Qw1
+              DeviceTokenRequest:
+                value:
+                  grant_type: device_token
+                  scope: openid
+                  deviceTokenID: '8888000000148396'
+                  secureCode: '326107'
+                  challenge: '791836'
+                  isBiometry: true
+              GuestAuthTokenRequest:
+                value:
+                  grant_type: guest_auth
+                  scope: openid
+                  phone_number: '79501425142'
+              TokenExchangeGuestTokenRequest:
+                value:
+                  grant_type: token_exchange_guest
+                  scope: openid
+                  jwt: eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMDA4MjMyMyIsImF1ZCI6Imo4Yk9vWjJ5MUZod0VLUGNhRlNTZ1lIRmJmb2EiLCJhY3IiOiJtc2E9ZXlKWUxWVnpaWEl0VTJWemMybHZiaTFKUkNJNkltRTJNems1WW1RMUxUZGtNRFF0TkdGbVlpMWlaRFZrTFRSa1lXSmxZakF4TURrNU1TSXNJbkp2ZFhSbFRtRnRaU0k2Ym5Wc2JDd2ljMmhoY21ST1lXMWxJanB1ZFd4c0xDSllMVkpQVlZSRkxVNUJUVVVpT201MWJHd3NJbGd0VTBoQlVrUXRUa0ZOUlNJNmJuVnNiQ3dpV0MxRVpXSjFaeUk2SW1aaGJITmxJaXdpV0MxSmJtbDBhV0YwYjNJdFNHOXpkQ0k2SWpFNU1pNHhOamd1TlRJdU1qRXhJaXdpV0MxRGFHRnVibVZzSWpvaVRXOWlhV3hsUW1GdWF6SWlMQ0pZTFZCc1lYUm1iM0p0SWpvaVlXNWtjbTlwWkNJc0lsZ3RURzluYVc0dFRXOWtaU0k2SW1kMVpYTjBJaXdpV0MxV1pYSnphVzl1SWpwdWRXeHNMQ0pZTFZKdmJHVnpJanB1ZFd4c0xDSklSVUZFUlZJeElqb2lkSEoxWlNJc0lraEZRVVJGVWpJaU9pSjBaWE4wYzNSeWFXNW5JbjA9IiwiYW1yIjpbImd1ZXN0X2F1dGgiXSwiYXpwIjoiajhiT29aMnkxRmh3RUtQY2FGU1NnWUhGYmZvYSIsInNwX25hbWUiOiJtb2JpbGUtYmFuayIsImRvbWFpbiI6Imd1ZXN0Iiwibm90X3JlZ2lzdGVyZWQiOiJ0cnVlIiwiYXV0aF9zZXNzaW9uX2lkIjoiYmVhOWE3MTctOWFkMy00OGQ1LTg2NTQtYTA2NmYxM2MxM2NjIiwidXNlcl9maW5nZXJwcmludCI6ImMxZmE3ZDVhNTZkN2NjMWI1MmY4NzQ3YmZjYTgxNGM2NDVlMDVkMzcyOTBiNDA3OTJkZDEzNDU1OTdhOTY5NDIiLCJtc2Ffc2Vzc2lvbl9pZCI6ImE2Mzk5YmQ1LTdkMDQtNGFmYi1iZDVkLTRkYWJlYjAxMDk5MSIsImlzcyI6Imh0dHA6Ly9rMy1hYy13ZWJzc28vIiwibmJmIjoxNjE5Nzg2MDYxLCJleHAiOjE2MTk3ODY0MjEsImlhdCI6MTYxOTc4NjA2MX0.qbf3o5OaN-qetteclf_a9DzR0VJyyTzNFfEsvrMZVdbYNiCXekYyTJEbQQzXORUxgLzFaIqRuROPqfr3y8olu_Hq1cLYSXtVV9FwBsScqI0Q3yqiBoLzIhNL0bktWw-EfqYXB3_3bg1NbqYWIBjieMR28jNxwMd5LnhgbDHuSF0c7JAK2iStmnzuBcxFB7voYMsGuSnyHg9t4f1vadRfu5dFXGLMQNAifcrxxXaOlT6mqbmFK-un1xcJe7dpuGBO17EgElf1Ih6t6101JtIGCI73NhfHA2pLJrtFp6wytkO9RJ9c1JCtiN6ybG2Q2VQzEEbyYRajgDmH5UBC0YyqcA
+              TokenExchangeTokenRequest:
+                value:
+                  grant_type: token_exchange
+                  scope: openid
+                  jwt: eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMDA4MjMyMyIsImF1ZCI6Imo4Yk9vWjJ5MUZod0VLUGNhRlNTZ1lIRmJmb2EiLCJhY3IiOiJtc2E9ZXlKWUxWVnpaWEl0VTJWemMybHZiaTFKUkNJNkltRTJNems1WW1RMUxUZGtNRFF0TkdGbVlpMWlaRFZrTFRSa1lXSmxZakF4TURrNU1TSXNJbkp2ZFhSbFRtRnRaU0k2Ym5Wc2JDd2ljMmhoY21ST1lXMWxJanB1ZFd4c0xDSllMVkpQVlZSRkxVNUJUVVVpT201MWJHd3NJbGd0VTBoQlVrUXRUa0ZOUlNJNmJuVnNiQ3dpV0MxRVpXSjFaeUk2SW1aaGJITmxJaXdpV0MxSmJtbDBhV0YwYjNJdFNHOXpkQ0k2SWpFNU1pNHhOamd1TlRJdU1qRXhJaXdpV0MxRGFHRnVibVZzSWpvaVRXOWlhV3hsUW1GdWF6SWlMQ0pZTFZCc1lYUm1iM0p0SWpvaVlXNWtjbTlwWkNJc0lsZ3RURzluYVc0dFRXOWtaU0k2SW1kMVpYTjBJaXdpV0MxV1pYSnphVzl1SWpwdWRXeHNMQ0pZTFZKdmJHVnpJanB1ZFd4c0xDSklSVUZFUlZJeElqb2lkSEoxWlNJc0lraEZRVVJGVWpJaU9pSjBaWE4wYzNSeWFXNW5JbjA9IiwiYW1yIjpbImd1ZXN0X2F1dGgiXSwiYXpwIjoiajhiT29aMnkxRmh3RUtQY2FGU1NnWUhGYmZvYSIsInNwX25hbWUiOiJtb2JpbGUtYmFuayIsImRvbWFpbiI6Imd1ZXN0Iiwibm90X3JlZ2lzdGVyZWQiOiJ0cnVlIiwiYXV0aF9zZXNzaW9uX2lkIjoiYmVhOWE3MTctOWFkMy00OGQ1LTg2NTQtYTA2NmYxM2MxM2NjIiwidXNlcl9maW5nZXJwcmludCI6ImMxZmE3ZDVhNTZkN2NjMWI1MmY4NzQ3YmZjYTgxNGM2NDVlMDVkMzcyOTBiNDA3OTJkZDEzNDU1OTdhOTY5NDIiLCJtc2Ffc2Vzc2lvbl9pZCI6ImE2Mzk5YmQ1LTdkMDQtNGFmYi1iZDVkLTRkYWJlYjAxMDk5MSIsImlzcyI6Imh0dHA6Ly9rMy1hYy13ZWJzc28vIiwibmJmIjoxNjE5Nzg2MDYxLCJleHAiOjE2MTk3ODY0MjEsImlhdCI6MTYxOTc4NjA2MX0.qbf3o5OaN-qetteclf_a9DzR0VJyyTzNFfEsvrMZVdbYNiCXekYyTJEbQQzXORUxgLzFaIqRuROPqfr3y8olu_Hq1cLYSXtVV9FwBsScqI0Q3yqiBoLzIhNL0bktWw-EfqYXB3_3bg1NbqYWIBjieMR28jNxwMd5LnhgbDHuSF0c7JAK2iStmnzuBcxFB7voYMsGuSnyHg9t4f1vadRfu5dFXGLMQNAifcrxxXaOlT6mqbmFK-un1xcJe7dpuGBO17EgElf1Ih6t6101JtIGCI73NhfHA2pLJrtFp6wytkO9RJ9c1JCtiN6ybG2Q2VQzEEbyYRajgDmH5UBC0YyqcA
+                  redirectUri: 'http://site.com'
+              RefreshTokenRequest:
+                value:
+                  grant_type: refresh_token
+                  scope: openid
+                  refresh_token: 8e199d4d-cf80-4001-b98c-3eb716fcae75
+              QrAuthTokenRequest:
+                value:
+                  grant_type: qr_auth
+                  scope: openid
+                  jwt: eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMDA4MjMyMyIsImF1ZCI6Imo4Yk9vWjJ5MUZod0VLUGNhRlNTZ1lIRmJmb2EiLCJhY3IiOiJtc2E9ZXlKWUxWVnpaWEl0VTJWemMybHZiaTFKUkNJNkltRTJNems1WW1RMUxUZGtNRFF0TkdGbVlpMWlaRFZrTFRSa1lXSmxZakF4TURrNU1TSXNJbkp2ZFhSbFRtRnRaU0k2Ym5Wc2JDd2ljMmhoY21ST1lXMWxJanB1ZFd4c0xDSllMVkpQVlZSRkxVNUJUVVVpT201MWJHd3NJbGd0VTBoQlVrUXRUa0ZOUlNJNmJuVnNiQ3dpV0MxRVpXSjFaeUk2SW1aaGJITmxJaXdpV0MxSmJtbDBhV0YwYjNJdFNHOXpkQ0k2SWpFNU1pNHhOamd1TlRJdU1qRXhJaXdpV0MxRGFHRnVibVZzSWpvaVRXOWlhV3hsUW1GdWF6SWlMQ0pZTFZCc1lYUm1iM0p0SWpvaVlXNWtjbTlwWkNJc0lsZ3RURzluYVc0dFRXOWtaU0k2SW1kMVpYTjBJaXdpV0MxV1pYSnphVzl1SWpwdWRXeHNMQ0pZTFZKdmJHVnpJanB1ZFd4c0xDSklSVUZFUlZJeElqb2lkSEoxWlNJc0lraEZRVVJGVWpJaU9pSjBaWE4wYzNSeWFXNW5JbjA9IiwiYW1yIjpbImd1ZXN0X2F1dGgiXSwiYXpwIjoiajhiT29aMnkxRmh3RUtQY2FGU1NnWUhGYmZvYSIsInNwX25hbWUiOiJtb2JpbGUtYmFuayIsImRvbWFpbiI6Imd1ZXN0Iiwibm90X3JlZ2lzdGVyZWQiOiJ0cnVlIiwiYXV0aF9zZXNzaW9uX2lkIjoiYmVhOWE3MTctOWFkMy00OGQ1LTg2NTQtYTA2NmYxM2MxM2NjIiwidXNlcl9maW5nZXJwcmludCI6ImMxZmE3ZDVhNTZkN2NjMWI1MmY4NzQ3YmZjYTgxNGM2NDVlMDVkMzcyOTBiNDA3OTJkZDEzNDU1OTdhOTY5NDIiLCJtc2Ffc2Vzc2lvbl9pZCI6ImE2Mzk5YmQ1LTdkMDQtNGFmYi1iZDVkLTRkYWJlYjAxMDk5MSIsImlzcyI6Imh0dHA6Ly9rMy1hYy13ZWJzc28vIiwibmJmIjoxNjE5Nzg2MDYxLCJleHAiOjE2MTk3ODY0MjEsImlhdCI6MTYxOTc4NjA2MX0.qbf3o5OaN-qetteclf_a9DzR0VJyyTzNFfEsvrMZVdbYNiCXekYyTJEbQQzXORUxgLzFaIqRuROPqfr3y8olu_Hq1cLYSXtVV9FwBsScqI0Q3yqiBoLzIhNL0bktWw-EfqYXB3_3bg1NbqYWIBjieMR28jNxwMd5LnhgbDHuSF0c7JAK2iStmnzuBcxFB7voYMsGuSnyHg9t4f1vadRfu5dFXGLMQNAifcrxxXaOlT6mqbmFK-un1xcJe7dpuGBO17EgElf1Ih6t6101JtIGCI73NhfHA2pLJrtFp6wytkO9RJ9c1JCtiN6ybG2Q2VQzEEbyYRajgDmH5UBC0YyqcA
+              TokenExchangePwdTokenRequest:
+                value:
+                  grant_type: token_exchange_pwd
+                  scope: openid
+                  password: fregerhbnertnber
+                  jwt: eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMDA4MjMyMyIsImF1ZCI6Imo4Yk9vWjJ5MUZod0VLUGNhRlNTZ1lIRmJmb2EiLCJhY3IiOiJtc2E9ZXlKWUxWVnpaWEl0VTJWemMybHZiaTFKUkNJNkltRTJNems1WW1RMUxUZGtNRFF0TkdGbVlpMWlaRFZrTFRSa1lXSmxZakF4TURrNU1TSXNJbkp2ZFhSbFRtRnRaU0k2Ym5Wc2JDd2ljMmhoY21ST1lXMWxJanB1ZFd4c0xDSllMVkpQVlZSRkxVNUJUVVVpT201MWJHd3NJbGd0VTBoQlVrUXRUa0ZOUlNJNmJuVnNiQ3dpV0MxRVpXSjFaeUk2SW1aaGJITmxJaXdpV0MxSmJtbDBhV0YwYjNJdFNHOXpkQ0k2SWpFNU1pNHhOamd1TlRJdU1qRXhJaXdpV0MxRGFHRnVibVZzSWpvaVRXOWlhV3hsUW1GdWF6SWlMQ0pZTFZCc1lYUm1iM0p0SWpvaVlXNWtjbTlwWkNJc0lsZ3RURzluYVc0dFRXOWtaU0k2SW1kMVpYTjBJaXdpV0MxV1pYSnphVzl1SWpwdWRXeHNMQ0pZTFZKdmJHVnpJanB1ZFd4c0xDSklSVUZFUlZJeElqb2lkSEoxWlNJc0lraEZRVVJGVWpJaU9pSjBaWE4wYzNSeWFXNW5JbjA9IiwiYW1yIjpbImd1ZXN0X2F1dGgiXSwiYXpwIjoiajhiT29aMnkxRmh3RUtQY2FGU1NnWUhGYmZvYSIsInNwX25hbWUiOiJtb2JpbGUtYmFuayIsImRvbWFpbiI6Imd1ZXN0Iiwibm90X3JlZ2lzdGVyZWQiOiJ0cnVlIiwiYXV0aF9zZXNzaW9uX2lkIjoiYmVhOWE3MTctOWFkMy00OGQ1LTg2NTQtYTA2NmYxM2MxM2NjIiwidXNlcl9maW5nZXJwcmludCI6ImMxZmE3ZDVhNTZkN2NjMWI1MmY4NzQ3YmZjYTgxNGM2NDVlMDVkMzcyOTBiNDA3OTJkZDEzNDU1OTdhOTY5NDIiLCJtc2Ffc2Vzc2lvbl9pZCI6ImE2Mzk5YmQ1LTdkMDQtNGFmYi1iZDVkLTRkYWJlYjAxMDk5MSIsImlzcyI6Imh0dHA6Ly9rMy1hYy13ZWJzc28vIiwibmJmIjoxNjE5Nzg2MDYxLCJleHAiOjE2MTk3ODY0MjEsImlhdCI6MTYxOTc4NjA2MX0.qbf3o5OaN-qetteclf_a9DzR0VJyyTzNFfEsvrMZVdbYNiCXekYyTJEbQQzXORUxgLzFaIqRuROPqfr3y8olu_Hq1cLYSXtVV9FwBsScqI0Q3yqiBoLzIhNL0bktWw-EfqYXB3_3bg1NbqYWIBjieMR28jNxwMd5LnhgbDHuSF0c7JAK2iStmnzuBcxFB7voYMsGuSnyHg9t4f1vadRfu5dFXGLMQNAifcrxxXaOlT6mqbmFK-un1xcJe7dpuGBO17EgElf1Ih6t6101JtIGCI73NhfHA2pLJrtFp6wytkO9RJ9c1JCtiN6ybG2Q2VQzEEbyYRajgDmH5UBC0YyqcA
+              LoginRestorePwdTokenRequest:
+                value:
+                  grant_type: login_restore_pwd
+                  scope: openid
+                  login: MyLogin
+              CardNumberRestorePwdTokenRequest:
+                value:
+                  grant_type: card_restore_pwd
+                  scope: openid
+                  cardNumber: '4111111116111611'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: X-Device-FingerPrint
+          description: Fingerprint мобильного устройства
+        - schema:
+            type: string
+          in: header
+          name: x-finger-print
+          description: fingerprint интернет-браузера
+        - schema:
+            type: string
+          in: header
+          name: User-Agent
+          description: Информация об устройстве пользователя (стандартный заголовок)
+  /oidc/logout:
+    get:
+      summary: Logout
+      tags: []
+      responses:
+        '200':
+          description: OK
+      operationId: get-oidc-logout
+      description: 'Метод для прерывания сессии пользователя, отзыва токена'
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: id_token_hint
+          required: true
+          description: ID токен пользователя
+components:
+  schemas:
+    GrantType:
+      type: string
+      title: GrantType
+      enum:
+        - login
+        - login_restore_pwd
+        - card_number
+        - card_restore_pwd
+        - qr_auth
+        - token_exchange_pwd
+        - phone_number
+        - device_token
+        - login_mb
+        - card_number_mb
+        - guest_auth
+        - guest_smb_auth
+        - token_exchange_guest
+        - token_exchange
+        - refresh_token
+      description: |
+        Тип авторизации
+
+        - login - Вход по логину/УНК
+        - login_mb - Вход по логину/УНК (мобильное приложение, эквивалент login)
+        - login_restore_pwd - восстановление пароля по логину
+        - card_restore_pwd - восстановление пароля по карте
+        - card_number - вход по карте
+        - card_number_mb - вход по карте (мобильное приложение, эквивалент card_number)
+        - qr_auth - вход по qr коду 
+        - token_exchange_pwd - смена токена на завершении восстановления пароля
+        - phone_number - вход по номеру телефона 
+        - device_token - вход по пасскоду 
+        - guest_auth - вход в лайт 
+        - token_exchange_guest - смена токена после регистрации в лайт 
+        - guest_smb_auth - вход в СМБ (2-й сценарий) 
+        - token_exchange - вход в Мои инвестиции 
+        - refresh_token - обновление токена 
+    TokenRequest:
+      title: TokenRequest
+      type: object
+      properties:
+        grant_type:
+          $ref: '#/components/schemas/GrantType'
+        scope:
+          type: string
+          enum:
+            - openid
+          description: Набор параметров доступа. openid - доступное значение. Отправка его необходима для генерации id_token
+        otp:
+          type: string
+          description: 'SMS OTP '
+        transactionId:
+          type: string
+          description: 'Идентификатор операции, используемый вместе с SMS OTP'
+        sessionDataKey:
+          type: string
+          description: Идентификатор сессии аутентификации
+        deviceTokenID:
+          type: string
+          description: Идентификатор "кода доступа"
+        secureCode:
+          type: string
+          description: Сгенерированный секретный код со стороны клиента (для входа по пасскоду)
+        challenge:
+          type: string
+          description: 'Сгенерированный секретный код, со стороны сервера (для входа по пасскоду)'
+        login:
+          type: string
+          description: Логин/унк пользователя
+        password:
+          type: string
+          description: Пароль пользователя
+        cardNumber:
+          type: string
+          description: Номер карты
+        jwt:
+          type: string
+          description: JWT токен
+        redirectUri:
+          type: string
+          description: 'Адрес, куда пользователь будет перенаправлен после завершения аутентификации'
+        phoneNumber:
+          type: string
+          description: Номер телефона
+        phone_number:
+          type: string
+          description: Номер телефона
+        refresh_token:
+          type: string
+          description: Рефреш-токен
+        isBiometry:
+          type: boolean
+          description: Признак входа по touch/faceID
+      required:
+        - grant_type
+        - scope
+    TokenResponse:
+      title: TokenResponse
+      type: object
+      properties:
+        scope:
+          type: string
+          enum:
+            - openid
+          description: 'Набор параметров доступа, для которых сгенерированы токены доступа'
+        access_token:
+          type: string
+          description: токен доступа
+        refresh_token:
+          type: string
+          description: токен для обновления
+        id_token:
+          type: string
+          description: id токен
+      required:
+        - scope
+        - access_token
+        - refresh_token
+        - id_token
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ErrorType'
+        message:
+          type: string
+          description: Сообщение об ошибке
+        message_title:
+          type: string
+          description: Заголовок сообщения об ошибке
+        additional_properties:
+          description: 'Key-value объект, содержащий доп.параметры, соответствующие ошибке'
+          type: object
+          properties:
+            lock:
+              $ref: '#/components/schemas/UserLockType'
+            username:
+              type: string
+            mobile:
+              type: string
+            sessionDataKey:
+              type: string
+            domain:
+              type: string
+            transactionId:
+              type: string
+      required:
+        - type
+        - message
+        - message_title
+    ErrorType:
+      type: string
+      title: ErrorType
+      enum:
+        - generic_error
+        - generic_business_logic
+        - invalid_grant
+        - device_not_found
+        - card_not_found
+        - user_not_found
+        - user_locked
+        - device_token_not_active
+        - imsi_not_verified
+        - incorrect_pin
+        - incorrect_credentials
+        - authentication_failed
+        - otp_expired
+        - password_expired
+        - no_more_pin_attempts
+        - spm_access_deny
+        - second_factor_required
+        - password_required
+        - card_not_valid
+        - card_type_restricted
+        - user_discredited
+        - user_non_unique
+        - phone_number_not_format
+        - session_terminated
+        - phone_number_client
+        - guest_not_found
+        - user_disabled
+      description: |+
+        - generic_error - Возникла непредвиденная ошибка 
+        - generic_business_logic - Возникла ошибка бизнес-логики. Определяет общий тип всех ошибок подобного типа
+        - invalid_grant - означает, redirectUri, указанных в параметрах зарегистрированного клиента приложения, не совпадает с тем. что пришел в запросе
+        - device_not_found - Код доступа (пасскод) не был найден
+        - user_not_found - Пользователь с указанным УНК не найден 
+        - card_not_found - По указанному номеру карты ничего не найдено 
+        - user_locked - Пользователь заблокирован. В ответе будет присутствовать тип блокировки (временная/постоянная)
+        - device_token_not_active - Код доступа (пасскод) пользователя неактивный
+        - imsi_not_verified - Возможно пользователь сменил сим-карту, поэтому не удалось проверить его imsi статус 
+        - incorrect_pin - Код доступа (пасскод) указан неверно 
+        - authentication_failed - Ошибка во время аутентификации (неверный логин/пароль)
+        - otp_expired - предоставленный sms otp код просрочен 
+        - password_expired - пароль пользователя просрочен 
+        - no_more_pin_attempts - Попытки входа по коду доступа (пасскоду) исчерпаны 
+        - spm_access_deny - Пользователю запрещен доступ системой противодействия мошенничеству
+        - second_factor_required - Для входа требуется sms otp подтверждение. При возникновеннии данного типа ошибки пользователю отправляется sms otp на номер телефона, указанный при регистрации. В ответе приходят несколько параметров, которые необходимо отправить в повторном запросе на авторизацию/аутентификацию, вместе с sms otp из СМС
+        - password_required - для входа необходимо указать пароль 
+        - card_not_valid - предоставленный номер карты имеет некорректный формат, либо статус карты не позволяет ее использовать для входа 
+        - card_type_restricted - По указанному типу карты невозможно произвести вход
+        - user_discredited - аккаунт пользователя дискредитирован 
+        - guest_not_found - учетка клиента Лайт не найдена 
+
+    UserLockType:
+      type: string
+      title: UserLockType
+      enum:
+        - PERMANENT
+        - TEMPORARY
+      description: Тип блокировки пользователя
+  securitySchemes:
+    ClientAuthorization:
+      type: http
+      scheme: basic
+      description: 'Параметры авторизации клиентского приложения (clientKey, clientSecret)'
