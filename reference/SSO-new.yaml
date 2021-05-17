@@ -165,7 +165,7 @@ paths:
                 value:
                   grant_type: card_restore_pwd
                   scope: openid
-                  cardNumber: '4111111116111611'
+                  card_number: '4111111116111611'
               SecondFactorLoginTokenRequest:
                 value:
                   grant_type: login
