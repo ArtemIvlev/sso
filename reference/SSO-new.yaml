@@ -302,6 +302,9 @@ components:
         isBiometry:
           type: boolean
           description: Признак входа по touch/faceID
+        card_number:
+          type: string
+          description: Номер карты
       required:
         - grant_type
         - scope
