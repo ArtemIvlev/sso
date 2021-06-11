@@ -76,6 +76,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                check_card_required:
+                  value:
+                    type: check_card_required
+                    message: ''
+                    message_title: ''
+                    additional_properties:
+                      ucn: '123123123'
+                      jwt: 0b7b9cd8-5c40-4f62-a645-39827c3e2bf5
+                      domain: master
         '500':
           description: Internal Server Error
           content:
@@ -175,6 +185,20 @@ paths:
                   sessionDataKey: 13fac7a9-0e91-4411-aa9b-43b2f9cb4abe
                   login: string
                   password: string
+              GuestToClientTokenRequest1FA:
+                value:
+                  grant_type: guest_to_client
+                  scope: openid
+                  jwt: 0b7b9cd8-5c40-4f62-a645-39827c3e2bf5
+                  card_number: '1111222233334444'
+              GuestToClientTokenRequest2FA:
+                value:
+                  otp: '000000'
+                  sessionDataKey: 0b7b9cd8-5c40-4f62-a645-39827c3e2bf5
+                  grant_type: guest_to_client
+                  scope: openid
+                  jwt: 0b7b9cd8-5c40-4f62-a645-39827c3e2bf5
+                  card_number: '1111222233334444'
       parameters:
         - schema:
             type: string
@@ -228,6 +252,7 @@ components:
         - token_exchange_guest
         - token_exchange
         - refresh_token
+        - guest_to_client
       description: |
         Тип авторизации
 
@@ -246,6 +271,7 @@ components:
         - guest_smb_auth - вход в СМБ (2-й сценарий) 
         - token_exchange - вход в Мои инвестиции 
         - refresh_token - обновление токена 
+        - guest_to_client - процесс подтверждения перехода неклиента в клиенты
     TokenRequest:
       title: TokenRequest
       type: object
@@ -304,7 +330,6 @@ components:
           description: Признак входа по touch/faceID
         card_number:
           type: string
-          description: Номер карты
       required:
         - grant_type
         - scope
@@ -358,6 +383,10 @@ components:
             domain:
               type: string
             transactionId:
+              type: string
+            jwt:
+              type: string
+            ucn:
               type: string
       required:
         - type
@@ -416,6 +445,7 @@ components:
         - card_type_restricted - По указанному типу карты невозможно произвести вход
         - user_discredited - аккаунт пользователя дискредитирован 
         - guest_not_found - учетка клиента Лайт не найдена 
+        - check_card_required - возникает когда в процессе аутентификации было установлено, что неклиент стал полноценным клиентом банка. В этом случае необходимо пройти верификации перехода используя номер карты (см. grant_type=guest_to_client)
     UserLockType:
       type: string
       title: UserLockType
