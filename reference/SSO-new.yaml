@@ -423,6 +423,7 @@ components:
         - phone_number_client
         - guest_not_found
         - user_disabled
+        - phone_number_client
       description: |
         - generic_error - Возникла непредвиденная ошибка 
         - generic_business_logic - Возникла ошибка бизнес-логики. Определяет общий тип всех ошибок подобного типа
@@ -446,6 +447,7 @@ components:
         - user_discredited - аккаунт пользователя дискредитирован 
         - guest_not_found - учетка клиента Лайт не найдена 
         - check_card_required - возникает когда в процессе аутентификации было установлено, что неклиент стал полноценным клиентом банка. В этом случае необходимо пройти верификации перехода используя номер карты (см. grant_type=guest_to_client)
+        - phone_number_client - в случае, если гость (лайт) пользователь уже является клиентом
     UserLockType:
       type: string
       title: UserLockType
