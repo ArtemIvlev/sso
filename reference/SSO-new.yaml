@@ -239,6 +239,61 @@ paths:
           name: id_token_hint
           required: true
           description: ID токен пользователя
+  /oauth2/authorize:
+    post:
+      summary: Authorization endpoint
+      operationId: post-oauth2-authorize
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationResponse'
+              examples:
+                SuccessResponse:
+                  value:
+                    code: d2f8295b-fd2e-49d1-921f-90914aeeaec3
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                client_id:
+                  type: string
+                  description: 'Идентификатор клиентского приложения, для которого необходима авторизация'
+              required:
+                - client_id
+            examples:
+              AuthorizationRequest:
+                value:
+                  client_id: FmIAi5Z_LznRlVQWd0Go9gqFeywa
+        description: ''
+      description: |-
+        Используется для получения кодов авторизации для клиентских приложений. Полученный код используется в дальнейшем для обмена на токены доступа (refresh/id токены)
+
+        В запросе должен присутствовать ID токен (Bearer авторизация), на основе которого выполняется авторизация приложения с указанным client_id
+      parameters:
+        - schema:
+            type: string
+            example: Bearer  eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMDAxMTYxNCIsImF1ZCI6Imo4Yk9vWjJ5MUZod0VLUGNhRlNTZ1lIRmJmb2EiLCJhY3IiOiJtc2E9ZXlKWUxWVnpaWEl0VTJWemMybHZiaTFKUkNJNkltTmxNVGxqWldZeUxUYzRaakF0TkRnMk5DMWhPRFF6TFRrMU1XRTVPR000TURJeE5TSXNJbkp2ZFhSbFRtRnRaU0k2SW1SbFptRjFiSFFpTENKemFHRnlaRTVoYldVaU9pSnpPQ0lzSWxndFVrOVZWRVV0VGtGTlJTSTZJbVJsWm1GMWJIUWlMQ0pZTFZOSVFWSkVMVTVCVFVVaU9pSnpPQ0lzSWxndFJHVmlkV2NpT2lKbVlXeHpaU0lzSWxndFNXNXBkR2xoZEc5eUxVaHZjM1FpT2lJeE1DNHhPRGN1Tnk0eU1ETWlMQ0pZTFVOb1lXNXVaV3dpT2lKTmIySnBiR1ZDWVc1ck1pSXNJbGd0VUd4aGRHWnZjbTBpT2lKcFQxTWlMQ0pZTFV4dloybHVMVTF2WkdVaU9tNTFiR3dzSWxndFZtVnljMmx2YmlJNmJuVnNiQ3dpV0MxU2IyeGxjeUk2Ym5Wc2JDd2lTRVZCUkVWU01TSTZJblJ5ZFdVaUxDSklSVUZFUlZJeUlqb2lkR1Z6ZEhOMGNtbHVaeUo5IiwiYW1yIjpbImRldmljZV90b2tlbiJdLCJhenAiOiJqOGJPb1oyeTFGaHdFS1BjYUZTU2dZSEZiZm9hIiwic3BfbmFtZSI6Im1vYmlsZS1iYW5rIiwiZG9tYWluIjoibWFzdGVyIiwiYXV0aF9zZXNzaW9uX2lkIjoiN2M5Nzg1ZDItZjkzNS00YTQxLTlmZmEtYjRjYzcxYWU0MTA0IiwidXNlcl9maW5nZXJwcmludCI6ImYwY2FhYzNlMWI0YzQ1YTUxZmFhNTM4ZTA5NGJlNzExZTk2Y2RiN2M5Njg3ZWI2ZjQwZDg1ZWY0YWZkMjQ3M2EiLCJtc2Ffc2Vzc2lvbl9pZCI6ImNlMTljZWYyLTc4ZjAtNDg2NC1hODQzLTk1MWE5OGM4MDIxNSIsImlzcyI6Imh0dHA6Ly9rMy1hYy13ZWJzc28vIiwibmJmIjoxNjE5Nzc2ODU4LCJleHAiOjE2MTk3NzcyMTgsImlhdCI6MTYxOTc3Njg1OH0.iVSUIdHfa1lh6RKvFQ3CBEm7yQYXF4A67eF4QHbWeGjVP2Pg8iv8N3up1_ZjgmthLRx9idVw1AlQFZUrN8ECZt4pUodyDpg_b0-6Ir3Mncw8uvKHrdHHQ6MtjkW0Sdqu-v2r2jeY3zY-6W-N92c4UgMJ2IP8T7jIprTdhDCpIfmdTX24FS-KRrgGPZZ2pUiheAXcQdRaMnojs4Gm5Vq9EvaPwjK9wwtF8AglfRplFwjl2rwoVYUo7lpR__nUA6nXcNMvhvlGwfCn9-WCDChksValMr-ghwopCQL1WATgWwvP9v4K6Uwaghynk36RpnlAe1E4prhX9gHJX4J8ACWLgg
+          in: header
+          name: Authorization
+          required: true
+          description: 'ID токен, полученный на этапе аутентификации в мобильное приложение по пасскоду (grant_type=device_token)'
 components:
   schemas:
     GrantType:
@@ -464,6 +519,15 @@ components:
         - PERMANENT
         - TEMPORARY
       description: Тип блокировки пользователя
+    AuthorizationResponse:
+      title: AuthorizationResponse
+      type: object
+      properties:
+        code:
+          type: string
+          description: Код авторизации
+      required:
+        - code
   securitySchemes:
     ClientAuthorization:
       type: http
