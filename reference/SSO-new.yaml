@@ -212,6 +212,10 @@ paths:
                   grant_type: code
                   scope: openid
                   code: d2f8295b-fd2e-49d1-921f-90914aeeaec3
+        description: |-
+          Request body content type: application/x-www-form-urlencoded
+
+          Примечание: все параметры тела запроса передаются как x-www-form-urlencoded. Криво работает данный рендер openapi, поэтому они отображаются как json.
       parameters:
         - schema:
             type: string
@@ -286,7 +290,10 @@ paths:
               AuthorizationRequest:
                 value:
                   client_id: FmIAi5Z_LznRlVQWd0Go9gqFeywa
-        description: ''
+        description: |-
+          Request body content type: application/x-www-form-urlencoded
+
+          Примечание: все параметры тела запроса передаются как x-www-form-urlencoded. Криво работает данный рендер openapi, поэтому они отображаются как json.
       description: |-
         Используется для получения кодов авторизации для клиентских приложений. Полученный код используется в дальнейшем для обмена на токены доступа (refresh/id токены)
 
