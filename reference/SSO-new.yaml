@@ -86,6 +86,14 @@ paths:
                       ucn: '123123123'
                       jwt: 0b7b9cd8-5c40-4f62-a645-39827c3e2bf5
                       domain: master
+                phone_number_client:
+                  value:
+                    type: phone_number_client
+                    message: string
+                    message_title: string
+                    additional_properties:
+                      jwt: string
+                      ucn: string
         '500':
           description: Internal Server Error
           content:
@@ -428,6 +436,7 @@ components:
         - generic_error - Возникла непредвиденная ошибка 
         - generic_business_logic - Возникла ошибка бизнес-логики. Определяет общий тип всех ошибок подобного типа
         - invalid_grant - означает, redirectUri, указанных в параметрах зарегистрированного клиента приложения, не совпадает с тем. что пришел в запросе
+        - invalid_request - входные параметры запроса имеют невалидное значение или отсутствуют
         - device_not_found - Код доступа (пасскод) не был найден
         - user_not_found - Пользователь с указанным УНК не найден 
         - card_not_found - По указанному номеру карты ничего не найдено 
